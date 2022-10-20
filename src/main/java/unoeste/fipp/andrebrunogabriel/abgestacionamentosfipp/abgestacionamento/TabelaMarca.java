@@ -19,28 +19,30 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TabelaMarca implements Initializable {
-    public TableColumn <Marca, Integer>colCodigo;
-    public TableColumn <Marca, String>colDescricao;
     public TextField tfFiltro;
     public TableView <Marca>Tabela;
+    public TableColumn <Marca, Integer>colCodigo;
+    public TableColumn <Marca, String>colDescricao;
+
+    public static Marca aux = new Marca();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        colCodigo.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        colDescricao.setCellValueFactory(new PropertyValueFactory<>("Descricao"));
+        colCodigo.setCellValueFactory(new PropertyValueFactory<Marca, Integer>("Id"));
+        colDescricao.setCellValueFactory(new PropertyValueFactory<Marca, String>("Descricao"));
         CarregarTabela();
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
-
     }
 
     public void onActionNovaMarca(ActionEvent actionEvent) throws Exception{
-        FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("CadMarca.fxml"));
+        aux = new Marca();
+        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadMarca.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         Stage stage = new Stage();
-        stage.setTitle("ABG Estacionamentos");
+        stage.setTitle("Nova Marca");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -52,5 +54,35 @@ public class TabelaMarca implements Initializable {
 
     private void CarregarTabela(){
         Tabela.setItems(FXCollections.observableArrayList(Singleton.ListaMarcas));
+    }
+
+
+
+    public void onActionAlterar(ActionEvent actionEvent) throws Exception {
+        aux = null;
+        if (Tabela.getSelectionModel().getSelectedIndex() > -1)
+            aux = Tabela.getSelectionModel().getSelectedItem();
+
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadMarca.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        Stage stage = new Stage();
+        stage.setTitle("Alterar Marca");
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        stage.setResizable(false);
+
+
+        stage.showAndWait();
+
+        CarregarTabela();
+    }
+
+    public void onActionApagar(ActionEvent actionEvent) {
+        Singleton.ListaMarcas.remove(Tabela.getSelectionModel().getSelectedItem());
+        CarregarTabela();
     }
 }

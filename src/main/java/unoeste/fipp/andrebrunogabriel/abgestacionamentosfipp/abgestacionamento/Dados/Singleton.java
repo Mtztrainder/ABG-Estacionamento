@@ -4,4 +4,8 @@ import java.util.ArrayList;
 
 public class Singleton {
     public static ArrayList<Marca> ListaMarcas = new ArrayList<>();
+
+    private Singleton(){
+
+    }
 }
