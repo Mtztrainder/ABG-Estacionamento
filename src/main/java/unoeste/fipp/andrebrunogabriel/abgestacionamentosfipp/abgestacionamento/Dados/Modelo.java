@@ -1,8 +1,9 @@
 package unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados;
 
-public class Marca {
+public class Modelo {
     private int Id;
     private String Descricao;
+    private Marca Marca;
 
     public void setId(int id) {
         Id = id;
@@ -10,6 +11,10 @@ public class Marca {
 
     public void setDescricao(String descricao) {
         Descricao = descricao;
+    }
+
+    public void setMarca(Marca marca) {
+        Marca = marca;
     }
 
     public int getId() {
@@ -25,17 +30,21 @@ public class Marca {
         return getDescricao();
     }
 
+    public Marca getMarca() {
+        return Marca;
+    }
 
-    public Marca(int Id, String Descricao){
+    public Modelo(int Id, String Descricao, Marca Marca){
         setId(Id);
         setDescricao(Descricao);
+        setMarca(Marca);
     }
 
-    public Marca(String Descricao) {
-        this(0, Descricao);
+    public Modelo(String Descricao, Marca Marca) {
+        this(0, Descricao, Marca);
     }
 
-    public Marca() {
-        this(0, "");
+    public Modelo() {
+        this(0, "", new Marca());
     }
 }

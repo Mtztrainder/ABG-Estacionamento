@@ -13,36 +13,43 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Marca;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Modelo;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Singleton;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TabelaMarca implements Initializable {
+public class TabelaModelo implements Initializable {
     public TextField tfFiltro;
-    public TableView <Marca>Tabela;
-    public TableColumn <Marca, Integer>colCodigo;
-    public TableColumn <Marca, String>colDescricao;
+    public TableView <Modelo>Tabela;
+    public TableColumn <Modelo, Integer>colCodigo;
+    public TableColumn <Modelo, Marca>colMarca;
+    public TableColumn <Modelo, String>colDescricao;
 
-    public static Marca aux = new Marca();
+    public static Modelo aux = new Modelo();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        colCodigo.setCellValueFactory(new PropertyValueFactory<Marca, Integer>("Id"));
-        colDescricao.setCellValueFactory(new PropertyValueFactory<Marca, String>("Descricao"));
+        colCodigo.setCellValueFactory(new PropertyValueFactory<Modelo, Integer>("Id"));
+        colDescricao.setCellValueFactory(new PropertyValueFactory<Modelo, String>("Descricao"));
+        colMarca.setCellValueFactory(new PropertyValueFactory<Modelo, Marca>("Marca"));
         CarregarTabela();
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
     }
 
-    public void onActionNovaMarca(ActionEvent actionEvent) throws Exception{
-        aux = new Marca();
-        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadMarca.fxml"));
+    public void AbrirCadastro(String Titulo){
+
+    }
+
+    public void onActionNovoModelo(ActionEvent actionEvent) throws Exception{
+        aux = new Modelo();
+        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadModelo.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         Stage stage = new Stage();
-        stage.setTitle("Nova Marca");
+        stage.setTitle("Novo Modelo");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -53,7 +60,7 @@ public class TabelaMarca implements Initializable {
     }
 
     private void CarregarTabela(){
-        Tabela.setItems(FXCollections.observableArrayList(Singleton.ListaMarcas));
+        Tabela.setItems(FXCollections.observableArrayList(Singleton.ListaModelos));
     }
 
 
@@ -63,7 +70,7 @@ public class TabelaMarca implements Initializable {
         if (Tabela.getSelectionModel().getSelectedIndex() > -1)
             aux = Tabela.getSelectionModel().getSelectedItem();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadMarca.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadModelo.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         Stage stage = new Stage();
@@ -80,7 +87,7 @@ public class TabelaMarca implements Initializable {
     }
 
     public void onActionApagar(ActionEvent actionEvent) {
-        Singleton.ListaMarcas.remove(Tabela.getSelectionModel().getSelectedItem());
+        Singleton.ListaModelos.remove(Tabela.getSelectionModel().getSelectedItem());
         CarregarTabela();
     }
 }
