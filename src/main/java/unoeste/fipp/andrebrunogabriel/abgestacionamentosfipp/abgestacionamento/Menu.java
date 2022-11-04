@@ -51,6 +51,10 @@ public class Menu extends Application {
         AlteraPainel("TabelaVeiculo.fxml");
     }
 
+    public void onActionValores(ActionEvent actionEvent) throws Exception {
+        AlteraPainel("TabelaValores.fxml");
+    }
+
     public void onActionSair(ActionEvent actionEvent) {
         System.exit(0);
     }

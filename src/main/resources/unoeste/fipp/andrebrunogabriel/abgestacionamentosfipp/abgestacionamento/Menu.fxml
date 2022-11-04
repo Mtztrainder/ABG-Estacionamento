@@ -20,7 +20,8 @@
                   <MenuItem mnemonicParsing="false" onAction="#onActionModelo" text="Modelo..." />
                   <MenuItem mnemonicParsing="false" onAction="#onActionProprietario" text="Proprietário..." />
                   <MenuItem mnemonicParsing="false" onAction="#onActionVeiculo" text="Veículo..." />
-                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#onActionValores" text="Valores..." />
+                <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#onActionSair" text="Sair">
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="X" control="UP" meta="UP" shift="UP" shortcut="UP" />

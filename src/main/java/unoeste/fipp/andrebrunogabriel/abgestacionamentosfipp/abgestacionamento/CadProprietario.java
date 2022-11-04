@@ -1,5 +1,6 @@
 package unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -33,16 +34,11 @@ public class CadProprietario implements Initializable {
         tfCidade.setText(TabelaProprietario.aux.getCidade());
         tfEstado.setText(TabelaProprietario.aux.getEstado());
 
-
-
-        /*tfDesc.setText(TabelaMarca.aux.getDescricao());
-        cbMarca.setItems(FXCollections.observableArrayList(Singleton.ListaMarcas));
-
         Platform.runLater(
                 () -> {
-                    tfDesc.requestFocus();
+                    tfNome.requestFocus();
                 }
-        );*/
+        );
     }
 
 

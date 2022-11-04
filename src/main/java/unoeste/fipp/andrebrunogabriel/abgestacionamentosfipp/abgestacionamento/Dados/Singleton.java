@@ -7,6 +7,7 @@ public class Singleton {
     public static ArrayList<Modelo> ListaModelos = new ArrayList<>();
     public static ArrayList<Proprietario> ListaProprietario = new ArrayList<>();
     public static ArrayList<Veiculo> ListaVeiculo = new ArrayList<>();
+    public static ArrayList<Valores> ListaValores = new ArrayList<>();
 
     public static String[] ListaCores = new String[]{
             "Azul",
