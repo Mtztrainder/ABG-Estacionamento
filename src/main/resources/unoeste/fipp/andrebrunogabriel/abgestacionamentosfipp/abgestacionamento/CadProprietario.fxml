@@ -72,14 +72,6 @@
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="54.0" layoutY="301.0" prefHeight="17.0" prefWidth="496.0" text="Complemento">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <TextField fx:id="tfComplemento" layoutX="53.0" layoutY="319.0" prefHeight="30.0" prefWidth="624.0" promptText="Digite o Complemento">
-         <font>
-            <Font size="14.0" />
-         </font></TextField>
       <Label layoutX="56.0" layoutY="251.0" prefHeight="17.0" prefWidth="149.0" text="Bairro">
          <font>
             <Font size="14.0" />
@@ -101,6 +93,14 @@
             <Font size="14.0" />
          </font></Label>
       <TextField fx:id="tfEstado" layoutX="527.0" layoutY="267.0" prefHeight="25.0" prefWidth="149.0" promptText="Digite o Estado">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Label layoutX="54.0" layoutY="301.0" prefHeight="17.0" prefWidth="496.0" text="Complemento">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <TextField fx:id="tfComplemento" layoutX="53.0" layoutY="319.0" prefHeight="30.0" prefWidth="624.0" promptText="Digite o Complemento">
          <font>
             <Font size="14.0" />
          </font></TextField>

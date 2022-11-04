@@ -1,7 +1,7 @@
 package unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados;
 
 public class Proprietario {
-    private int Id, Numero;
+    private int Id, Numero, Telefone;
     private String CPF, Email, Nome, CEP, Logradouro, Complemento, Bairro, Cidade, Estado;
 
     public void setId(int id) {
@@ -10,6 +10,9 @@ public class Proprietario {
 
     public void setNumero(int numero) {
         Numero = numero;
+    }
+    public void setTelefone(int Telefone) {
+        this.Telefone = Telefone;
     }
 
     public void setCPF(String CPF) {
@@ -56,6 +59,9 @@ public class Proprietario {
         return Numero;
     }
 
+    public int getTelefone() {
+        return Telefone;
+    }
     public String getCPF() {
         return CPF;
     }
@@ -90,6 +96,11 @@ public class Proprietario {
 
     public String getEstado() {
         return Estado;
+    }
+
+    @Override
+    public String toString() {
+        return getNome();
     }
 
     public Proprietario(int id, String CPF, String nome,

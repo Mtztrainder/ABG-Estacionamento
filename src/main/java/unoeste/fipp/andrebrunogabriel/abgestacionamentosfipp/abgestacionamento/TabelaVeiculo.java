@@ -12,33 +12,32 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Marca;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Modelo;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Proprietario;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Singleton;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Veiculo;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TabelaProprietario implements Initializable {
+public class TabelaVeiculo implements Initializable {
     public TextField tfFiltro;
-    public TableView <Proprietario>Tabela;
-    public TableColumn <Proprietario, Integer>colCodigo;
-    public TableColumn <Proprietario, String>colCPF;
-    public TableColumn <Proprietario, String>colNome;
-    public TableColumn <Proprietario, String>colCidade;
-    public TableColumn <Proprietario, String>colEstado;
+    public TableView <Veiculo>Tabela;
+    public TableColumn <Veiculo, Integer>colCodigo;
+    public TableColumn <Veiculo, String>colPlaca;
+    public TableColumn <Veiculo, String>colCor;
+    public TableColumn <Veiculo, Modelo>colModelo;
+    public TableColumn <Veiculo, Proprietario>colProprietario;
 
-    public static Proprietario aux = new Proprietario();
+    public static Veiculo aux = new Veiculo();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        colCodigo.setCellValueFactory(new PropertyValueFactory<Proprietario, Integer>("Id"));
-        colCPF.setCellValueFactory(new PropertyValueFactory<Proprietario, String>("CPF"));
-        colNome.setCellValueFactory(new PropertyValueFactory<Proprietario, String>("Nome"));
-        colCidade.setCellValueFactory(new PropertyValueFactory<Proprietario, String>("Cidade"));
-        colEstado.setCellValueFactory(new PropertyValueFactory<Proprietario, String>("Estado"));
-
+        colCodigo.setCellValueFactory(new PropertyValueFactory<Veiculo, Integer>("Id"));
+        colPlaca.setCellValueFactory(new PropertyValueFactory<Veiculo, String>("Placa"));
+        colCor.setCellValueFactory(new PropertyValueFactory<Veiculo, String>("Cor"));
+        colModelo.setCellValueFactory(new PropertyValueFactory<Veiculo, Modelo>("Modelo"));
+        colProprietario.setCellValueFactory(new PropertyValueFactory<Veiculo, Proprietario>("Proprietario"));
 
         CarregarTabela();
     }
@@ -50,13 +49,13 @@ public class TabelaProprietario implements Initializable {
 
     }
 
-    public void onActionNovoProprietario(ActionEvent actionEvent) throws Exception{
-        aux = new Proprietario();
-        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadProprietario.fxml"));
+    public void onActionNovoVeiculo(ActionEvent actionEvent) throws Exception{
+        aux = new Veiculo();
+        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadVeiculo.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         Stage stage = new Stage();
-        stage.setTitle("Novo Proprietario");
+        stage.setTitle("Novo Veículo");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -67,7 +66,7 @@ public class TabelaProprietario implements Initializable {
     }
 
     private void CarregarTabela(){
-        Tabela.setItems(FXCollections.observableArrayList(Singleton.ListaProprietario));
+        Tabela.setItems(FXCollections.observableArrayList(Singleton.ListaVeiculo));
     }
 
 
@@ -77,11 +76,11 @@ public class TabelaProprietario implements Initializable {
         if (Tabela.getSelectionModel().getSelectedIndex() > -1)
             aux = Tabela.getSelectionModel().getSelectedItem();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadProprietario.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadVeiculo.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         Stage stage = new Stage();
-        stage.setTitle("Alterar Proprietario");
+        stage.setTitle("Alterar Veículo");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -94,7 +93,7 @@ public class TabelaProprietario implements Initializable {
     }
 
     public void onActionApagar(ActionEvent actionEvent) {
-        Singleton.ListaProprietario.remove(Tabela.getSelectionModel().getSelectedItem());
+        Singleton.ListaVeiculo.remove(Tabela.getSelectionModel().getSelectedItem());
         CarregarTabela();
     }
 }
