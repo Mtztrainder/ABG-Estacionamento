@@ -1,22 +1,53 @@
 package unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
+import org.json.JSONObject;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Proprietario;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Singleton;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ResourceBundle;
+
+
 
 public class CadProprietario implements Initializable {
     public TextField tfCodigo, tfNome, tfCPF, tfEmail, tfTelefone, tfCEP,
             tfLogradouro, tfNumero, tfComplemento, tfBairro, tfCidade, tfEstado;
     public Button btConfirmar, btCancelar;
+
+    //Método Consumir Api Via CEP
+    public static String consultaCep(String cep)
+    {
+        StringBuffer dados = new StringBuffer();
+        try {
+            URL url = new URL("https://viacep.com.br/ws/" + cep + "/json/");
+            URLConnection con = url.openConnection();
+            con.setDoInput(true);
+            con.setDoOutput(true);
+            con.setAllowUserInteraction(false);
+            InputStream in = con.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String s = "";
+            while (null != (s = br.readLine()))
+                dados.append(s);
+            br.close();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return dados.toString();
+    }
 
     //método executado quando a janela é criada.
     @Override
@@ -33,7 +64,21 @@ public class CadProprietario implements Initializable {
         tfBairro.setText(TabelaProprietario.aux.getBairro());
         tfCidade.setText(TabelaProprietario.aux.getCidade());
         tfEstado.setText(TabelaProprietario.aux.getEstado());
+        tfCEP.focusedProperty().addListener(new ChangeListener<Boolean>() {             @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    System.out.println("Textfield on focus");
+                } else {
 
+                    String json_str = consultaCep(tfCEP.getText());
+                    JSONObject my_obj = new JSONObject(json_str);
+                    tfCidade.setText(my_obj.getString("localidade"));
+                    tfBairro.setText(my_obj.getString("bairro"));
+                    tfLogradouro.setText(my_obj.getString("logradouro"));
+                    tfEstado.setText(my_obj.getString("uf"));
+                }
+            }
+        });
         Platform.runLater(
                 () -> {
                     tfNome.requestFocus();
