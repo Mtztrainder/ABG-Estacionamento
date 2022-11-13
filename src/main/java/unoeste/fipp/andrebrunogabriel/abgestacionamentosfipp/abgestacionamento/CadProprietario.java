@@ -57,7 +57,7 @@ public class CadProprietario implements Initializable {
         tfCPF.setText(TabelaProprietario.aux.getCPF());
         tfEmail.setText(TabelaProprietario.aux.getEmail());
         tfTelefone.setText(String.valueOf(TabelaProprietario.aux.getTelefone()));
-        tfCEP.setText(TabelaProprietario.aux.getCEP());
+        tfCEP.setText(String.valueOf(TabelaProprietario.aux.getCEP()));
         tfLogradouro.setText(TabelaProprietario.aux.getLogradouro());
         tfNumero.setText(String.valueOf(TabelaProprietario.aux.getNumero()));
         tfComplemento.setText(TabelaProprietario.aux.getComplemento());
@@ -94,13 +94,14 @@ public class CadProprietario implements Initializable {
                         tfCPF.getText(),
                         tfNome.getText(),
                         tfEmail.getText(),
-                        tfCEP.getText(),
+                        Integer.parseInt(tfCEP.getText()),
                         tfEstado.getText(),
                         tfCidade.getText(),
                         tfBairro.getText(),
                         tfLogradouro.getText(),
-                        Integer.parseInt(tfNumero.getText()),
-                        tfComplemento.getText()
+                        tfNumero.getText(),
+                        tfComplemento.getText(),
+                        tfTelefone.getText()
                         )
         );
 

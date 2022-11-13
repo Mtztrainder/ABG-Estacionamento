@@ -12,6 +12,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.MarcaDAL;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Util.Banco;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Marca;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Singleton;
 
@@ -34,6 +36,7 @@ public class TabelaMarca implements Initializable {
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
+        Tabela.setItems(FXCollections.observableArrayList(new MarcaDAL().SelectFilter(tfFiltro.getText())));
     }
 
     public void onActionNovaMarca(ActionEvent actionEvent) throws Exception{
@@ -53,7 +56,8 @@ public class TabelaMarca implements Initializable {
     }
 
     private void CarregarTabela(){
-        Tabela.setItems(FXCollections.observableArrayList(Singleton.ListaMarcas));
+
+        Tabela.setItems(FXCollections.observableArrayList(new MarcaDAL().SelectAll()));
     }
 
 
@@ -65,22 +69,19 @@ public class TabelaMarca implements Initializable {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadMarca.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-
         Stage stage = new Stage();
         stage.setTitle("Alterar Marca");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
-
         stage.setResizable(false);
-
-
         stage.showAndWait();
-
         CarregarTabela();
     }
 
     public void onActionApagar(ActionEvent actionEvent) {
-        Singleton.ListaMarcas.remove(Tabela.getSelectionModel().getSelectedItem());
+        if (Tabela.getSelectionModel().getSelectedIndex() > -1)
+            aux = Tabela.getSelectionModel().getSelectedItem();
+        new MarcaDAL().deletar(aux.getId());
         CarregarTabela();
     }
 }

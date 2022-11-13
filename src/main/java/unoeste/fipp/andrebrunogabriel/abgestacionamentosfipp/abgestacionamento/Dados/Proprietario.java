@@ -1,17 +1,17 @@
 package unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados;
 
 public class Proprietario {
-    private int Id, Numero, Telefone;
-    private String CPF, Email, Nome, CEP, Logradouro, Complemento, Bairro, Cidade, Estado;
+    private int Id, CEP;
+    private String CPF, Email, Nome, Numero, Logradouro, Complemento, Bairro, Cidade, Estado, Telefone;
 
     public void setId(int id) {
         Id = id;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         Numero = numero;
     }
-    public void setTelefone(int Telefone) {
+    public void setTelefone(String Telefone) {
         this.Telefone = Telefone;
     }
 
@@ -27,7 +27,7 @@ public class Proprietario {
         Email = email;
     }
 
-    public void setCEP(String CEP) {
+    public void setCEP(int CEP) {
         this.CEP = CEP;
     }
 
@@ -55,11 +55,11 @@ public class Proprietario {
         return Id;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return Numero;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return Telefone;
     }
     public String getCPF() {
@@ -74,7 +74,7 @@ public class Proprietario {
         return Nome;
     }
 
-    public String getCEP() {
+    public int getCEP() {
         return CEP;
     }
 
@@ -104,8 +104,8 @@ public class Proprietario {
     }
 
     public Proprietario(int id, String CPF, String nome,
-                        String email, String CEP, String estado, String cidade, String bairro,
-                        String logradouro, int numero, String complemento) {
+                        String email, int CEP, String estado, String cidade, String bairro,
+                        String logradouro, String numero, String complemento, String telefone) {
         setId(id);
         setCPF(CPF);
         setNome(nome);
@@ -121,15 +121,16 @@ public class Proprietario {
         setLogradouro(logradouro);
         setNumero(numero);
         setComplemento(complemento);
+        setTelefone(telefone);
     }
 
     public Proprietario(String CPF, String nome,
-                        String email, String CEP, String estado, String cidade, String bairro,
-                        String logradouro, int numero, String complemento) {
-        this(0, CPF, nome, email, CEP, estado, cidade, bairro, logradouro, numero, complemento);
+                        String email, int CEP, String estado, String cidade, String bairro,
+                        String logradouro, String numero, String complemento, String telefone) {
+        this(0, CPF, nome, email, CEP, estado, cidade, bairro, logradouro, numero, complemento, telefone);
     }
 
     public Proprietario(){
-        this(0, "", "", "", "", "", "", "", "", 0, "");
+        this(0, "", "", "", 0, "", "", "", "", "", "", "");
     }
 }
