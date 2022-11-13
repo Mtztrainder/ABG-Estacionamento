@@ -30,7 +30,7 @@ public class CadProprietario implements Initializable {
     //Método Consumir Api Via CEP
     public static String consultaCep(String cep)
     {
-        StringBuffer dados = new StringBuffer();
+        StringBuilder dados = new StringBuilder();
         try {
             URL url = new URL("https://viacep.com.br/ws/" + cep + "/json/");
             URLConnection con = url.openConnection();

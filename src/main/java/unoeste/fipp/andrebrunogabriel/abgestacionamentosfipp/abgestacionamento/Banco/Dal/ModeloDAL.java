@@ -59,7 +59,7 @@ public class ModeloDAL {
     public List<Modelo> SelectAll()
     {
         List<Modelo> listaModelos= new ArrayList<Modelo>();
-        String sql = "select * from modelo md inner join marca mc on mc.mar_cod = md.mar_cod";
+        String sql = "select * from modelo md inner join marca mc on mc.mar_cod = md.mar_cod order by mod_desc";
         Banco.Conectar();
         ResultSet rs = Banco.getConexao().consultar(sql);
         try {
@@ -77,10 +77,10 @@ public class ModeloDAL {
         List<Modelo> listaModelos= new ArrayList<Modelo>();
 
         try{
-            String sql = "select * from modelo md inner join marca mc on mc.mar_cod = md.mar_cod where mod_desc LIKE ?";
+            String sql = "select * from modelo md inner join marca mc on mc.mar_cod = md.mar_cod where lower(mod_desc) LIKE ? order by mod_desc";
             Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
-            pstmt.setString(1, filtro+"%");
+            pstmt.setString(1, filtro.toLowerCase()+"%");
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
             while(rs.next())
             {

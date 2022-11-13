@@ -58,7 +58,7 @@ public class MarcaDAL {
     public List<Marca> SelectAll()
     {
         List<Marca> listaMarcas= new ArrayList<Marca>();
-        String sql = "select * from marca";
+        String sql = "select * from marca order by mar_desc";
         Banco.Conectar();
         ResultSet rs = Banco.getConexao().consultar(sql);
         try {
@@ -76,10 +76,10 @@ public class MarcaDAL {
         List<Marca> listaMarcas= new ArrayList<Marca>();
 
         try{
-            String sql = "select * from marca where mar_desc LIKE ?";
+            String sql = "select * from marca where lower(mar_desc) LIKE ? order by mar_desc";
             Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
-            pstmt.setString(1, filtro+"%");
+            pstmt.setString(1, filtro.toLowerCase()+"%");
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
             while(rs.next())
             {

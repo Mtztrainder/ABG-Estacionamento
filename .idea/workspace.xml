@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93c2d754-194c-4792-a8ec-c1d585e0319a" name="Changes" comment="Att Via-Cep">
+    <list default="true" id="93c2d754-194c-4792-a8ec-c1d585e0319a" name="Changes" comment="Att">
+      <change afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Dados/Conexao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadMarca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadMarca.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadModelo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadModelo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Banco/Dal/MarcaDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Banco/Dal/MarcaDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Banco/Dal/ModeloDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Banco/Dal/ModeloDAL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadProprietario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadProprietario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Dados/Proprietario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Dados/Proprietario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaMarca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaMarca.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaModelo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaModelo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadModelo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadModelo.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
