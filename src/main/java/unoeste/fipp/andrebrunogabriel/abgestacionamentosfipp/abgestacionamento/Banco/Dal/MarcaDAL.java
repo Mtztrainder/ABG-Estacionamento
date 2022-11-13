@@ -41,6 +41,24 @@ public class MarcaDAL {
         }
         return  false;
     }
+
+    public boolean dependentes(int id){
+        try {
+            String sql = "select count(1) from Modelo where mar_cod=?";
+            Banco.Conectar();
+
+            PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
+            rs.next();
+            return rs.getInt(1) > 0;
+        }catch(SQLException sqlex){
+            System.out.println("Erro: "+ sqlex.getMessage());
+        }
+
+        return false;
+    }
+
     public boolean deletar(int id)
     {
         try{

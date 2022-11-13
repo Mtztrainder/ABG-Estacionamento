@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -81,7 +82,16 @@ public class TabelaMarca implements Initializable {
     public void onActionApagar(ActionEvent actionEvent) {
         if (Tabela.getSelectionModel().getSelectedIndex() > -1)
             aux = Tabela.getSelectionModel().getSelectedItem();
-        new MarcaDAL().deletar(aux.getId());
-        CarregarTabela();
+        if (!new MarcaDAL().dependentes(aux.getId()))
+        {
+            new MarcaDAL().deletar(aux.getId());
+            CarregarTabela();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Erro");
+            alert.setContentText("Não foi possível remover! '"+aux.getDescricao()+"' possui dependentes.");
+            alert.showAndWait();
+        }
     }
 }
