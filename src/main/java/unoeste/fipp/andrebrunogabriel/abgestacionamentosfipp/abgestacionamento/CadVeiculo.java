@@ -9,6 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ModeloDAL;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ProprietarioDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.*;
 
 import java.net.URL;
@@ -28,8 +30,8 @@ public class CadVeiculo implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         tfCodigo.setText("0");
         tfPlaca.setText(TabelaVeiculo.aux.getPlaca());
-        cbModelo.setItems(FXCollections.observableArrayList(Singleton.ListaModelos));
-        cbProprietario.setItems(FXCollections.observableArrayList(Singleton.ListaProprietario));
+        cbModelo.setItems(FXCollections.observableArrayList(new ModeloDAL().SelectAll()));
+        cbProprietario.setItems(FXCollections.observableArrayList(new ProprietarioDAL().SelectAll()));
         cbCor.setItems(FXCollections.observableArrayList(Singleton.ListaCores));
 
         Platform.runLater(
