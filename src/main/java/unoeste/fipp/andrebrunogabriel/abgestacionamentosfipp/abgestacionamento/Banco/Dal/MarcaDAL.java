@@ -41,6 +41,7 @@ public class MarcaDAL {
         }
         return  false;
     }
+
     public boolean deletar(int id)
     {
         try{

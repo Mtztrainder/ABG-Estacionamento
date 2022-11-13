@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ProprietarioDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Marca;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Modelo;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Proprietario;
@@ -44,6 +45,7 @@ public class TabelaProprietario implements Initializable {
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
+        Tabela.setItems(FXCollections.observableArrayList(new ProprietarioDAL().SelectFilter(tfFiltro.getText())));
     }
 
     public void AbrirCadastro(String Titulo){
@@ -67,7 +69,7 @@ public class TabelaProprietario implements Initializable {
     }
 
     private void CarregarTabela(){
-        Tabela.setItems(FXCollections.observableArrayList(Singleton.ListaProprietario));
+        Tabela.setItems(FXCollections.observableArrayList(new ProprietarioDAL().SelectAll()));
     }
 
 
@@ -94,7 +96,9 @@ public class TabelaProprietario implements Initializable {
     }
 
     public void onActionApagar(ActionEvent actionEvent) {
-        Singleton.ListaProprietario.remove(Tabela.getSelectionModel().getSelectedItem());
+        if (Tabela.getSelectionModel().getSelectedIndex() > -1)
+            aux = Tabela.getSelectionModel().getSelectedItem();
+        new ProprietarioDAL().deletar(aux.getId());
         CarregarTabela();
     }
 }

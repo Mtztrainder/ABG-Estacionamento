@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PropietarioDAL {
+public class ProprietarioDAL {
     public boolean inserir(Proprietario proprietario)
     {
         try{
@@ -28,8 +28,6 @@ public class PropietarioDAL {
             pstmt.setString(8, proprietario.getEstado());
             pstmt.setString(9, proprietario.getEmail());
             pstmt.setString(10, proprietario.getTelefone());
-
-
             return Banco.getConexao().manipular(pstmt.toString());
         }catch (SQLException sqlex)
         {
@@ -37,16 +35,24 @@ public class PropietarioDAL {
         }
         return false;
     }
-    public boolean alterar(Modelo modelo)
+    public boolean alterar(Proprietario proprietario)
     {
 
         try{
-            String sql = "update Modelo set mar_cod=?, mod_desc=? where mod_cod=?";
+            String sql = "update proprietario set prop_cpf=?, prop_nome=?,prop_rua=?,prop_numero=?, prop_cep=?,prop_bairro=?, prop_cidade=?, prop_uf=?, prop_email=?, prop_fone=? where prop_cod=?";
             Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
-            pstmt.setInt(1, modelo.getMarca().getId());
-            pstmt.setString(2, modelo.getDescricao());
-            pstmt.setInt(3, modelo.getId());
+            pstmt.setString(1, proprietario.getCPF());
+            pstmt.setString(2, proprietario.getNome());
+            pstmt.setString(3, proprietario.getLogradouro());
+            pstmt.setString(4, proprietario.getNumero());
+            pstmt.setInt(5,proprietario.getCEP());
+            pstmt.setString(6, proprietario.getBairro());
+            pstmt.setString(7,proprietario.getCidade());
+            pstmt.setString(8, proprietario.getEstado());
+            pstmt.setString(9, proprietario.getEmail());
+            pstmt.setString(10, proprietario.getTelefone());
+            pstmt.setInt(11, proprietario.getId());
             return Banco.getConexao().manipular(pstmt.toString());
         }catch(SQLException sqlex){
             System.out.println("Erro: "+ sqlex.getMessage());
@@ -56,7 +62,7 @@ public class PropietarioDAL {
     public boolean deletar(int id)
     {
         try{
-            String sql = "delete from Modelo where mod_cod=?";
+            String sql = "delete from proprietario where prop_cod=?";
             Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
@@ -67,39 +73,39 @@ public class PropietarioDAL {
         return  false;
     }
 
-    public List<Modelo> SelectAll()
+    public List<Proprietario> SelectAll()
     {
-        List<Modelo> listaModelos= new ArrayList<Modelo>();
-        String sql = "select * from modelo md inner join marca mc on mc.mar_cod = md.mar_cod";
+        List<Proprietario> listaProprietarios= new ArrayList<Proprietario>();
+        String sql = "select * from proprietario";
         Banco.Conectar();
         ResultSet rs = Banco.getConexao().consultar(sql);
         try {
             while(rs.next())
             {
-                listaModelos.add(new Modelo(rs.getInt("mod_cod"), rs.getString("mod_desc"), new Marca(rs.getInt("mar_cod"), rs.getString("mar_desc"))));
+                listaProprietarios.add(new Proprietario(rs.getInt("prop_cod"), rs.getString("prop_cpf"), rs.getString("prop_nome"), rs.getString("prop_email"), rs.getInt("prop_cep"), rs.getString("prop_uf"), rs.getString("prop_cidade"), rs.getString("prop_bairro"), rs.getString("prop_rua"), rs.getString("prop_numero"), rs.getString("prop_fone")));
             }
         }
         catch (Exception e){}
-        return listaModelos;
+        return listaProprietarios;
     }
 
-    public List<Modelo> SelectFilter(String filtro)
+    public List<Proprietario> SelectFilter(String filtro)
     {
-        List<Modelo> listaModelos= new ArrayList<Modelo>();
+        List<Proprietario> listaProprietarios = new ArrayList<Proprietario>();
 
         try{
-            String sql = "select * from modelo md inner join marca mc on mc.mar_cod = md.mar_cod where mod_desc LIKE ?";
+            String sql = "select * from proprietario where prop_nome LIKE ?";
             Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setString(1, filtro+"%");
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
             while(rs.next())
             {
-                listaModelos.add(new Modelo(rs.getInt("mod_cod"), rs.getString("mod_desc"), new Marca(rs.getInt("mar_cod"), rs.getString("mar_desc"))));
+                listaProprietarios.add(new Proprietario(rs.getInt("prop_cod"), rs.getString("prop_cpf"), rs.getString("prop_nome"), rs.getString("prop_email"), rs.getInt("prop_cep"), rs.getString("prop_uf"), rs.getString("prop_cidade"), rs.getString("prop_bairro"), rs.getString("prop_rua"), rs.getString("prop_numero"), rs.getString("prop_fone")));
             }
         }catch(SQLException sqlex){
             System.out.println("Erro: "+ sqlex.getMessage());
         }
-        return listaModelos;
+        return listaProprietarios;
     }
 }

@@ -2,7 +2,7 @@ package unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.
 
 public class Proprietario {
     private int Id, CEP;
-    private String CPF, Email, Nome, Numero, Logradouro, Complemento, Bairro, Cidade, Estado, Telefone;
+    private String CPF, Email, Nome, Numero, Logradouro,  Bairro, Cidade, Estado, Telefone;
 
     public void setId(int id) {
         Id = id;
@@ -35,9 +35,7 @@ public class Proprietario {
         Logradouro = logradouro;
     }
 
-    public void setComplemento(String complemento) {
-        Complemento = complemento;
-    }
+
 
     public void setBairro(String bairro) {
         Bairro = bairro;
@@ -82,9 +80,7 @@ public class Proprietario {
         return Logradouro;
     }
 
-    public String getComplemento() {
-        return Complemento;
-    }
+
 
     public String getBairro() {
         return Bairro;
@@ -105,7 +101,7 @@ public class Proprietario {
 
     public Proprietario(int id, String CPF, String nome,
                         String email, int CEP, String estado, String cidade, String bairro,
-                        String logradouro, String numero, String complemento, String telefone) {
+                        String logradouro, String numero, String telefone) {
         setId(id);
         setCPF(CPF);
         setNome(nome);
@@ -120,17 +116,16 @@ public class Proprietario {
         setBairro(bairro);
         setLogradouro(logradouro);
         setNumero(numero);
-        setComplemento(complemento);
         setTelefone(telefone);
     }
 
     public Proprietario(String CPF, String nome,
                         String email, int CEP, String estado, String cidade, String bairro,
-                        String logradouro, String numero, String complemento, String telefone) {
-        this(0, CPF, nome, email, CEP, estado, cidade, bairro, logradouro, numero, complemento, telefone);
+                        String logradouro, String numero,  String telefone) {
+        this(0, CPF, nome, email, CEP, estado, cidade, bairro, logradouro, numero,  telefone);
     }
 
     public Proprietario(){
-        this(0, "", "", "", 0, "", "", "", "", "", "", "");
+        this(0, "", "", "", 0, "", "", "", "", "", "");
     }
 }

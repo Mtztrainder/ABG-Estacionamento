@@ -6,10 +6,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
 import org.json.JSONObject;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ModeloDAL;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ProprietarioDAL;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Util.Banco;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Proprietario;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Singleton;
 
@@ -52,7 +56,7 @@ public class CadProprietario implements Initializable {
     //método executado quando a janela é criada.
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tfCodigo.setText("0");
+        tfCodigo.setText(String.valueOf(TabelaProprietario.aux.getId()));
         tfNome.setText(TabelaProprietario.aux.getNome());
         tfCPF.setText(TabelaProprietario.aux.getCPF());
         tfEmail.setText(TabelaProprietario.aux.getEmail());
@@ -60,7 +64,6 @@ public class CadProprietario implements Initializable {
         tfCEP.setText(String.valueOf(TabelaProprietario.aux.getCEP()));
         tfLogradouro.setText(TabelaProprietario.aux.getLogradouro());
         tfNumero.setText(String.valueOf(TabelaProprietario.aux.getNumero()));
-        tfComplemento.setText(TabelaProprietario.aux.getComplemento());
         tfBairro.setText(TabelaProprietario.aux.getBairro());
         tfCidade.setText(TabelaProprietario.aux.getCidade());
         tfEstado.setText(TabelaProprietario.aux.getEstado());
@@ -88,44 +91,36 @@ public class CadProprietario implements Initializable {
 
 
     public void onActionConfirmar(ActionEvent actionEvent) {
-
-        Singleton.ListaProprietario.add(
-                new Proprietario(Integer.parseInt(tfCodigo.getText()),
-                        tfCPF.getText(),
+        Proprietario p = new Proprietario(tfCPF.getText(),
                         tfNome.getText(),
                         tfEmail.getText(),
-                        Integer.parseInt(tfCEP.getText()),
+                        Integer.parseInt(tfCEP.getText().replace("-", "")),
                         tfEstado.getText(),
                         tfCidade.getText(),
                         tfBairro.getText(),
                         tfLogradouro.getText(),
                         tfNumero.getText(),
-                        tfComplemento.getText(),
                         tfTelefone.getText()
-                        )
-        );
+                        );
 
-        /*if(!tfDesc.getText().isEmpty() && cbMarca.getValue() != null){
 
-            Singleton.ListaModelos.add(
-                    new Modelo(Integer.parseInt(tfCodigo.getText()), tfDesc.getText(), cbMarca.getValue())
-            );
-
-            onActionCancelar(actionEvent);
-        }
-        else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Informação obrigatória");
-
-            if (tfDesc.getText().isEmpty()) {
-                alert.setContentText("A descrição não pode estar em branco.");
-            }
-            else
+        if(tfCodigo.getText().equals("0"))
+        {
+            if(!new ProprietarioDAL().inserir(p))
             {
-                alert.setContentText("A marca não pode estar em branco.");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Erro ao gravar: " + Banco.getConexao().getMensagemErro());
+                alert.showAndWait();
             }
-            alert.showAndWait();
-        }*/
+        }else{
+            p.setId(Integer.parseInt(tfCodigo.getText()));
+            if(!new ProprietarioDAL().alterar(p))
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Erro ao gravar: " + Banco.getConexao().getMensagemErro());
+                alert.showAndWait();
+            }
+        }
 
 
         tfNome.setText("");
