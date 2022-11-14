@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 
 public class CadProprietario implements Initializable {
     public TextField tfCodigo, tfNome, tfCPF, tfEmail, tfTelefone, tfCEP,
-            tfLogradouro, tfNumero, tfComplemento, tfBairro, tfCidade, tfEstado;
+            tfLogradouro, tfNumero, tfBairro, tfCidade, tfEstado;
     public Button btConfirmar, btCancelar;
 
     //Método Consumir Api Via CEP
@@ -130,7 +130,6 @@ public class CadProprietario implements Initializable {
         tfCEP.setText("");
         tfLogradouro.setText("");
         tfNumero.setText("");
-        tfComplemento.setText("");
         tfBairro.setText("");
         tfCidade.setText("");
         tfEstado.setText("");

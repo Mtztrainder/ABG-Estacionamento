@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="465.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.CadProprietario">
+<AnchorPane prefHeight="419.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.CadProprietario">
    <children>
       <Label layoutX="53.0" layoutY="33.0" prefHeight="17.0" prefWidth="67.0" text="Código">
          <font>
@@ -96,20 +96,12 @@
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="54.0" layoutY="301.0" prefHeight="17.0" prefWidth="496.0" text="Complemento">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <TextField fx:id="tfComplemento" layoutX="53.0" layoutY="319.0" prefHeight="30.0" prefWidth="624.0" promptText="Digite o Complemento">
-         <font>
-            <Font size="14.0" />
-         </font></TextField>
-      <Button fx:id="btCancelar" layoutX="421.0" layoutY="398.0" mnemonicParsing="false" onAction="#onActionCancelar" prefHeight="43.0" prefWidth="149.0" style="-fx-background-color: #ff5252;" text="Cancelar" textFill="WHITE">
+      <Button fx:id="btCancelar" layoutX="421.0" layoutY="336.0" mnemonicParsing="false" onAction="#onActionCancelar" prefHeight="43.0" prefWidth="149.0" style="-fx-background-color: #ff5252;" text="Cancelar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btConfirmar" layoutX="153.0" layoutY="398.0" mnemonicParsing="false" onAction="#onActionConfirmar" prefHeight="43.0" prefWidth="149.0" style="-fx-background-color: #1565c0;" text="Confirmar" textFill="WHITE">
+      <Button fx:id="btConfirmar" layoutX="153.0" layoutY="336.0" mnemonicParsing="false" onAction="#onActionConfirmar" prefHeight="43.0" prefWidth="149.0" style="-fx-background-color: #1565c0;" text="Confirmar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>

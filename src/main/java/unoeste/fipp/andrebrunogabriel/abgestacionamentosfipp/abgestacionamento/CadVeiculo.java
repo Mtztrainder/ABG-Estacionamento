@@ -11,6 +11,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ModeloDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ProprietarioDAL;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.VeiculoDAL;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Util.Banco;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.*;
 
 import java.net.URL;
@@ -28,8 +30,9 @@ public class CadVeiculo implements Initializable {
     //método executado quando a janela é criada.
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tfCodigo.setText("0");
+        tfCodigo.setText(String.valueOf(TabelaVeiculo.aux.getId()));
         tfPlaca.setText(TabelaVeiculo.aux.getPlaca());
+
         cbModelo.setItems(FXCollections.observableArrayList(new ModeloDAL().SelectAll()));
         cbProprietario.setItems(FXCollections.observableArrayList(new ProprietarioDAL().SelectAll()));
         cbCor.setItems(FXCollections.observableArrayList(Singleton.ListaCores));
@@ -41,22 +44,77 @@ public class CadVeiculo implements Initializable {
         );
     }
 
+    private void AlertaObrigatoriedade(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Informação obrigatória");
+
+        if (tfPlaca.getText().isEmpty()) {
+            alert.setContentText("A Placa não pode estar em branco.");
+        }
+        else
+        {
+            if (cbModelo.getValue() == null)
+                alert.setContentText("O Modelo não pode estar em branco.");
+            else
+                if (cbCor.getValue() == null)
+                    alert.setContentText("A Cor não pode estar em branco.");
+                else
+                    if (cbProprietario.getValue() == null)
+                        alert.setContentText("O Proprietário não pode estar em branco.");
+
+        }
+        alert.showAndWait();
+    }
+
     public void onActionConfirmar(ActionEvent actionEvent) {
         //if(!tfDesc.getText().isEmpty()){
 
-            Singleton.ListaVeiculo.add(
-                    new Veiculo(Integer.parseInt(tfCodigo.getText()), tfPlaca.getText(), cbCor.getValue(),  cbModelo.getValue(), cbProprietario.getValue())
-            );
+        Veiculo v = new Veiculo(tfPlaca.getText(),
+                                cbCor.getValue(),
+                                cbModelo.getValue(),
+                                cbProprietario.getValue()
+        );
 
-            onActionCancelar(actionEvent);
-        /*}
-        else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Informação obrigatória");
-            alert.setContentText("A descrição não pode estar em branco.");
+        if(tfCodigo.getText().equals("0"))
+        {
+            if(!tfPlaca.getText().isEmpty() &&
+                    cbCor.getValue() != null &&
+                    cbProprietario.getValue() != null &&
+                    cbModelo.getValue() != null)
+            {
+                if(!new VeiculoDAL().inserir(v))
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Erro ao gravar: " + Banco.getConexao().getMensagemErro());
+                    alert.showAndWait();
+                }
 
-            alert.showAndWait();
-        }*/
+                onActionCancelar(actionEvent);
+            }
+            else{
+                AlertaObrigatoriedade();
+            }
+        }else{
+            v.setId(Integer.parseInt(tfCodigo.getText()));
+
+            if(!tfPlaca.getText().isEmpty() &&
+                cbCor.getValue() != null &&
+                cbProprietario.getValue() != null &&
+                cbModelo.getValue() != null)
+            {
+                if(!new VeiculoDAL().alterar(v))
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Erro ao gravar: " + Banco.getConexao().getMensagemErro());
+                    alert.showAndWait();
+                }
+
+                onActionCancelar(actionEvent);
+            }
+            else{
+                AlertaObrigatoriedade();
+            }
+        }
     }
 
     public void onActionCancelar(ActionEvent actionEvent) {

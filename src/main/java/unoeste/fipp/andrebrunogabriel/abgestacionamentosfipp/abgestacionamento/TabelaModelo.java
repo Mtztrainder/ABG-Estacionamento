@@ -82,8 +82,6 @@ public class TabelaModelo implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
 
         stage.setResizable(false);
-
-
         stage.showAndWait();
 
         CarregarTabela();

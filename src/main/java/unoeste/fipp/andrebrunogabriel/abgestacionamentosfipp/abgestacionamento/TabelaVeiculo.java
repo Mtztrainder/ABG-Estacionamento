@@ -12,6 +12,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ModeloDAL;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.VeiculoDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Modelo;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Proprietario;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Singleton;
@@ -43,10 +45,7 @@ public class TabelaVeiculo implements Initializable {
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
-    }
-
-    public void AbrirCadastro(String Titulo){
-
+        Tabela.setItems(FXCollections.observableArrayList(new VeiculoDAL().SelectFilter(tfFiltro.getText())));
     }
 
     public void onActionNovoVeiculo(ActionEvent actionEvent) throws Exception{
@@ -66,7 +65,7 @@ public class TabelaVeiculo implements Initializable {
     }
 
     private void CarregarTabela(){
-        Tabela.setItems(FXCollections.observableArrayList(Singleton.ListaVeiculo));
+        Tabela.setItems(FXCollections.observableArrayList(new VeiculoDAL().SelectAll()));
     }
 
 
@@ -85,15 +84,15 @@ public class TabelaVeiculo implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
 
         stage.setResizable(false);
-
-
         stage.showAndWait();
 
         CarregarTabela();
     }
 
     public void onActionApagar(ActionEvent actionEvent) {
-        Singleton.ListaVeiculo.remove(Tabela.getSelectionModel().getSelectedItem());
+        if (Tabela.getSelectionModel().getSelectedIndex() > -1)
+            aux = Tabela.getSelectionModel().getSelectedItem();
+        new VeiculoDAL().deletar(aux.getId());
         CarregarTabela();
     }
 }
