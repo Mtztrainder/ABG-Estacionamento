@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProprietarioDAL {
+public class ProprietarioDAL implements IDAL<Proprietario>{
     public boolean inserir(Proprietario proprietario)
     {
         try{
@@ -28,7 +28,13 @@ public class ProprietarioDAL {
             pstmt.setString(8, proprietario.getEstado());
             pstmt.setString(9, proprietario.getEmail());
             pstmt.setString(10, proprietario.getTelefone());
-            return Banco.getConexao().manipular(pstmt.toString());
+
+            if (!Banco.getConexao().manipular(pstmt.toString())) {
+                System.out.println(Banco.getConexao().getMensagemErro());
+                return false;
+            }
+
+            return true;
         }catch (SQLException sqlex)
         {
             System.out.println("Erro: "+ sqlex.getMessage());
@@ -53,7 +59,13 @@ public class ProprietarioDAL {
             pstmt.setString(9, proprietario.getEmail());
             pstmt.setString(10, proprietario.getTelefone());
             pstmt.setInt(11, proprietario.getId());
-            return Banco.getConexao().manipular(pstmt.toString());
+
+            if (!Banco.getConexao().manipular(pstmt.toString())) {
+                System.out.println(Banco.getConexao().getMensagemErro());
+                return false;
+            }
+
+            return true;
         }catch(SQLException sqlex){
             System.out.println("Erro: "+ sqlex.getMessage());
         }
@@ -66,15 +78,57 @@ public class ProprietarioDAL {
             Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
-            return Banco.getConexao().manipular(pstmt.toString());
+
+            if (!Banco.getConexao().manipular(pstmt.toString())) {
+                System.out.println(Banco.getConexao().getMensagemErro());
+                return false;
+            }
+
+            return true;
         }catch(SQLException sqlex){
             System.out.println("Erro: "+ sqlex.getMessage());
         }
         return  false;
     }
 
-    public List<Proprietario> SelectAll()
-    {
+    @Override
+    public boolean dependentes(int id) {
+        try {
+            String sql = "select count(1) from Veiculo where prop_cod=?";
+            Banco.Conectar();
+
+            PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
+            rs.next();
+            return rs.getInt(1) > 0;
+        }catch(SQLException sqlex){
+            System.out.println("Erro: "+ sqlex.getMessage());
+        }
+
+        return false;
+    }
+
+    @Override
+    public Proprietario Select(int id) {
+        Proprietario P = null;
+
+        try{
+            String sql = "select * from proprietario where prop_cod = ?";
+            Banco.Conectar();
+            PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
+            rs.next();
+            P = new Proprietario(rs.getInt("prop_cod"), rs.getString("prop_cpf"), rs.getString("prop_nome"), rs.getString("prop_email"), rs.getInt("prop_cep"), rs.getString("prop_uf"), rs.getString("prop_cidade"), rs.getString("prop_bairro"), rs.getString("prop_rua"), rs.getString("prop_numero"), rs.getString("prop_fone"));
+        }catch(SQLException sqlex){
+            System.out.println("Erro: "+ sqlex.getMessage());
+        }
+        return P;
+    }
+
+    @Override
+    public List<Proprietario> Select() {
         List<Proprietario> listaProprietarios= new ArrayList<Proprietario>();
         String sql = "select * from proprietario";
         Banco.Conectar();
@@ -89,12 +143,12 @@ public class ProprietarioDAL {
         return listaProprietarios;
     }
 
-    public List<Proprietario> SelectFilter(String filtro)
-    {
+    @Override
+    public List<Proprietario> Select(String filtro) {
         List<Proprietario> listaProprietarios = new ArrayList<Proprietario>();
 
         try{
-            String sql = "select * from proprietario where prop_nome LIKE ?";
+            String sql = "select * from proprietario where prop_nome LIKE ? order by prop_nome";
             Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setString(1, filtro+"%");

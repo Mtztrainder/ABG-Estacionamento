@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class VeiculoDAL {
+public class VeiculoDAL implements IDAL<Veiculo>{
 
     public boolean inserir(Veiculo veiculo)
     {
@@ -28,7 +28,12 @@ public class VeiculoDAL {
             pstmt.setString(3, veiculo.getCor());
             pstmt.setInt(4, veiculo.getProprietario().getId());
 
-            return Banco.getConexao().manipular(pstmt.toString());
+            if (!Banco.getConexao().manipular(pstmt.toString())) {
+                System.out.println(Banco.getConexao().getMensagemErro());
+                return false;
+            }
+
+            return true;
         }catch (SQLException sqlex)
         {
             System.out.println("Erro: "+ sqlex.getMessage());
@@ -49,7 +54,12 @@ public class VeiculoDAL {
             pstmt.setInt(4, veiculo.getProprietario().getId());
             pstmt.setInt(5, veiculo.getId());
 
-            return Banco.getConexao().manipular(pstmt.toString());
+            if (!Banco.getConexao().manipular(pstmt.toString())) {
+                System.out.println(Banco.getConexao().getMensagemErro());
+                return false;
+            }
+
+            return true;
         }catch(SQLException sqlex){
             System.out.println("Erro: "+ sqlex.getMessage());
         }
@@ -73,24 +83,12 @@ public class VeiculoDAL {
         return false;
     }
 
-    public boolean deletar(int id)
-    {
-        try{
-            String sql = "delete from Veiculo where vei_cod=?";
-            Banco.Conectar();
-            PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
-            pstmt.setInt(1, id);
-            return Banco.getConexao().manipular(pstmt.toString());
-        }catch(SQLException sqlex){
-            System.out.println("Erro: "+ sqlex.getMessage());
-        }
-        return  false;
-    }
+    @Override
+    public Veiculo Select(int id) {
+       Veiculo v = null;
 
-    public List<Veiculo> SelectAll()
-    {
-        List<Veiculo> listaVeiculo= new ArrayList<Veiculo>();
-        String sql = "SELECT V.VEI_COD, "+
+        try{
+            String sql = "SELECT V.VEI_COD, "+
                     "	V.VEI_PLACA, "+
                     "	V.VEI_COR, "+
                     "	V.MOD_COD, "+
@@ -108,6 +106,67 @@ public class VeiculoDAL {
                     "	PR.PROP_UF, "+
                     "	PR.PROP_EMAIL, "+
                     "	PR.PROP_FONE "+
+                    "FROM VEICULO V "+
+                    "INNER JOIN MODELO MO ON MO.MOD_COD = V.MOD_COD "+
+                    "INNER JOIN MARCA MA ON MA.MAR_COD = MO.MAR_COD "+
+                    "INNER JOIN PROPRIETARIO PR ON PR.PROP_COD = V.PROP_COD "+
+                    "WHERE vei_cod = ? "+
+                    "ORDER BY V.VEI_PLACA";
+            Banco.Conectar();
+            PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
+            rs.next();
+
+            v = new Veiculo(rs.getInt("vei_cod"),
+                        rs.getString("vei_placa"),
+                        rs.getString("vei_cor"),
+                        new Modelo(rs.getInt("mod_cod"),
+                                rs.getString("mod_desc"),
+                                new Marca(rs.getInt("mar_cod"),
+                                        rs.getString("mar_desc"))
+                        ),
+                        new Proprietario(rs.getInt("prop_cod"),
+                                rs.getString("prop_cpf"),
+                                rs.getString("prop_nome"),
+                                rs.getString("prop_email"),
+                                rs.getInt("prop_cep"),
+                                rs.getString("prop_uf"),
+                                rs.getString("prop_cidade"),
+                                rs.getString("prop_bairro"),
+                                rs.getString("prop_rua"),
+                                rs.getString("prop_numero"),
+                                rs.getString("prop_fone")
+                        )
+                );
+
+        }catch(SQLException sqlex){
+            System.out.println("Erro: "+ sqlex.getMessage());
+        }
+        return v;
+    }
+
+    @Override
+    public List<Veiculo> Select() {
+        List<Veiculo> listaVeiculo= new ArrayList<Veiculo>();
+        String sql = "SELECT V.VEI_COD, "+
+                "	V.VEI_PLACA, "+
+                "	V.VEI_COR, "+
+                "	V.MOD_COD, "+
+                "	MO.MOD_DESC, "+
+                "   MA.MAR_COD, "+
+                "	MA.MAR_DESC, "+
+                "	V.PROP_COD, "+
+                "	PR.PROP_CPF, "+
+                "	PR.PROP_NOME, "+
+                "	PR.PROP_RUA, "+
+                "	PR.PROP_NUMERO, "+
+                "	PR.PROP_CEP, "+
+                "	PR.PROP_BAIRRO, "+
+                "	PR.PROP_CIDADE, "+
+                "	PR.PROP_UF, "+
+                "	PR.PROP_EMAIL, "+
+                "	PR.PROP_FONE "+
                 "FROM VEICULO V "+
                 "INNER JOIN MODELO MO ON MO.MOD_COD = V.MOD_COD "+
                 "INNER JOIN MARCA MA ON MA.MAR_COD = MO.MAR_COD "+
@@ -119,34 +178,34 @@ public class VeiculoDAL {
             while(rs.next())
             {
                 listaVeiculo.add(new Veiculo(rs.getInt("vei_cod"),
-                                             rs.getString("vei_placa"),
-                                             rs.getString("vei_cor"),
-                                             new Modelo(rs.getInt("mod_cod"),
-                                                        rs.getString("mod_desc"),
-                                                        new Marca(rs.getInt("mar_cod"),
-                                                                  rs.getString("mar_desc"))
-                                             ),
-                                             new Proprietario(rs.getInt("prop_cod"),
-                                                              rs.getString("prop_cpf"),
-                                                              rs.getString("prop_nome"),
-                                                              rs.getString("prop_email"),
-                                                              rs.getInt("prop_cep"),
-                                                              rs.getString("prop_uf"),
-                                                              rs.getString("prop_cidade"),
-                                                              rs.getString("prop_bairro"),
-                                                              rs.getString("prop_rua"),
-                                                              rs.getString("prop_numero"),
-                                                              rs.getString("prop_fone")
-                                                     )
-                                             ));
+                        rs.getString("vei_placa"),
+                        rs.getString("vei_cor"),
+                        new Modelo(rs.getInt("mod_cod"),
+                                rs.getString("mod_desc"),
+                                new Marca(rs.getInt("mar_cod"),
+                                        rs.getString("mar_desc"))
+                        ),
+                        new Proprietario(rs.getInt("prop_cod"),
+                                rs.getString("prop_cpf"),
+                                rs.getString("prop_nome"),
+                                rs.getString("prop_email"),
+                                rs.getInt("prop_cep"),
+                                rs.getString("prop_uf"),
+                                rs.getString("prop_cidade"),
+                                rs.getString("prop_bairro"),
+                                rs.getString("prop_rua"),
+                                rs.getString("prop_numero"),
+                                rs.getString("prop_fone")
+                        )
+                ));
             }
         }
         catch (Exception e){}
         return listaVeiculo;
     }
 
-    public List<Veiculo> SelectFilter(String filtro)
-    {
+    @Override
+    public List<Veiculo> Select(String filtro) {
         List<Veiculo> listaVeiculo= new ArrayList<Veiculo>();
 
         try{
@@ -207,4 +266,22 @@ public class VeiculoDAL {
         return listaVeiculo;
     }
 
+    public boolean deletar(int id)
+    {
+        try{
+            String sql = "delete from Veiculo where vei_cod=?";
+            Banco.Conectar();
+            PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
+            pstmt.setInt(1, id);
+            if (!Banco.getConexao().manipular(pstmt.toString())) {
+                System.out.println(Banco.getConexao().getMensagemErro());
+                return false;
+            }
+
+            return true;
+        }catch(SQLException sqlex){
+            System.out.println("Erro: "+ sqlex.getMessage());
+        }
+        return  false;
+    }
 }

@@ -5,13 +5,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ModeloDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ProprietarioDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Marca;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Modelo;
@@ -45,7 +44,7 @@ public class TabelaProprietario implements Initializable {
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
-        Tabela.setItems(FXCollections.observableArrayList(new ProprietarioDAL().SelectFilter(tfFiltro.getText())));
+        Tabela.setItems(FXCollections.observableArrayList(new ProprietarioDAL().Select(tfFiltro.getText())));
     }
 
     public void AbrirCadastro(String Titulo){
@@ -69,7 +68,7 @@ public class TabelaProprietario implements Initializable {
     }
 
     private void CarregarTabela(){
-        Tabela.setItems(FXCollections.observableArrayList(new ProprietarioDAL().SelectAll()));
+        Tabela.setItems(FXCollections.observableArrayList(new ProprietarioDAL().Select()));
     }
 
 
@@ -98,7 +97,24 @@ public class TabelaProprietario implements Initializable {
     public void onActionApagar(ActionEvent actionEvent) {
         if (Tabela.getSelectionModel().getSelectedIndex() > -1)
             aux = Tabela.getSelectionModel().getSelectedItem();
-        new ProprietarioDAL().deletar(aux.getId());
-        CarregarTabela();
+
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Deseja apagar o proprietário " + aux.getNome());
+
+        if (alert.showAndWait().get() == ButtonType.OK){
+
+            if (!new ProprietarioDAL().dependentes(aux.getId()))
+            {
+                new ProprietarioDAL().deletar(aux.getId());
+                CarregarTabela();
+            }
+            else{
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Erro");
+                alert.setContentText("Não foi possível remover! O proprietário "+aux.getNome()+" possui dependentes.");
+                alert.showAndWait();
+            }
+        }
     }
 }

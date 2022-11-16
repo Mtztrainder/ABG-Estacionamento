@@ -33,8 +33,8 @@ public class CadVeiculo implements Initializable {
         tfCodigo.setText(String.valueOf(TabelaVeiculo.aux.getId()));
         tfPlaca.setText(TabelaVeiculo.aux.getPlaca());
 
-        cbModelo.setItems(FXCollections.observableArrayList(new ModeloDAL().SelectAll()));
-        cbProprietario.setItems(FXCollections.observableArrayList(new ProprietarioDAL().SelectAll()));
+        cbModelo.setItems(FXCollections.observableArrayList(new ModeloDAL().Select()));
+        cbProprietario.setItems(FXCollections.observableArrayList(new ProprietarioDAL().Select()));
         cbCor.setItems(FXCollections.observableArrayList(Singleton.ListaCores));
 
         Platform.runLater(

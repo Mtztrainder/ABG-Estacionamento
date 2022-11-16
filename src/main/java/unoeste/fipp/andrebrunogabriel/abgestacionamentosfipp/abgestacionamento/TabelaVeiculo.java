@@ -5,14 +5,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ModeloDAL;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ProprietarioDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.VeiculoDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Modelo;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Proprietario;
@@ -45,7 +44,7 @@ public class TabelaVeiculo implements Initializable {
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
-        Tabela.setItems(FXCollections.observableArrayList(new VeiculoDAL().SelectFilter(tfFiltro.getText())));
+        Tabela.setItems(FXCollections.observableArrayList(new VeiculoDAL().Select(tfFiltro.getText())));
     }
 
     public void onActionNovoVeiculo(ActionEvent actionEvent) throws Exception{
@@ -65,7 +64,7 @@ public class TabelaVeiculo implements Initializable {
     }
 
     private void CarregarTabela(){
-        Tabela.setItems(FXCollections.observableArrayList(new VeiculoDAL().SelectAll()));
+        Tabela.setItems(FXCollections.observableArrayList(new VeiculoDAL().Select()));
     }
 
 
@@ -92,7 +91,25 @@ public class TabelaVeiculo implements Initializable {
     public void onActionApagar(ActionEvent actionEvent) {
         if (Tabela.getSelectionModel().getSelectedIndex() > -1)
             aux = Tabela.getSelectionModel().getSelectedItem();
-        new VeiculoDAL().deletar(aux.getId());
-        CarregarTabela();
+
+
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Deseja apagar o veículo " + aux.getPlaca());
+
+        if (alert.showAndWait().get() == ButtonType.OK){
+
+            if (!new VeiculoDAL().dependentes(aux.getId()))
+            {
+                new VeiculoDAL().deletar(aux.getId());
+                CarregarTabela();
+            }
+            else{
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Erro");
+                alert.setContentText("Não foi possível remover! O veículo "+aux.getPlaca()+" possui dependentes.");
+                alert.showAndWait();
+            }
+        }
     }
 }

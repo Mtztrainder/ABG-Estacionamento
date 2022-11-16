@@ -5,9 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
@@ -39,7 +37,7 @@ public class TabelaModelo implements Initializable {
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
-        Tabela.setItems(FXCollections.observableArrayList(new ModeloDAL().SelectFilter(tfFiltro.getText())));
+        Tabela.setItems(FXCollections.observableArrayList(new ModeloDAL().Select(tfFiltro.getText())));
     }
 
     public void AbrirCadastro(String Titulo){
@@ -63,7 +61,7 @@ public class TabelaModelo implements Initializable {
     }
 
     private void CarregarTabela(){
-        Tabela.setItems(FXCollections.observableArrayList(new ModeloDAL().SelectAll()));
+        Tabela.setItems(FXCollections.observableArrayList(new ModeloDAL().Select()));
     }
 
 
@@ -77,7 +75,7 @@ public class TabelaModelo implements Initializable {
         Scene scene = new Scene(fxmlLoader.load());
 
         Stage stage = new Stage();
-        stage.setTitle("Alterar Marca");
+        stage.setTitle("Alterar Modelo");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -90,7 +88,24 @@ public class TabelaModelo implements Initializable {
     public void onActionApagar(ActionEvent actionEvent) {
         if (Tabela.getSelectionModel().getSelectedIndex() > -1)
             aux = Tabela.getSelectionModel().getSelectedItem();
-        new ModeloDAL().deletar(aux.getId());
-        CarregarTabela();
+
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Deseja apagar o modelo " + aux.getDescricao());
+
+        if (alert.showAndWait().get() == ButtonType.OK){
+
+            if (!new ModeloDAL().dependentes(aux.getId()))
+            {
+                new ModeloDAL().deletar(aux.getId());
+                CarregarTabela();
+            }
+            else{
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Erro");
+                alert.setContentText("Não foi possível remover! O modelo "+aux.getDescricao()+" possui dependentes.");
+                alert.showAndWait();
+            }
+        }
     }
 }

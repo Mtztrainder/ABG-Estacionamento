@@ -16,6 +16,7 @@ import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.B
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Util.Banco;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Proprietario;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Singleton;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Formatacoes.MaskFieldUtil;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -59,20 +60,24 @@ public class CadProprietario implements Initializable {
         tfCodigo.setText(String.valueOf(TabelaProprietario.aux.getId()));
         tfNome.setText(TabelaProprietario.aux.getNome());
         tfCPF.setText(TabelaProprietario.aux.getCPF());
+
+        MaskFieldUtil.cpfField(this.tfCPF);
+
         tfEmail.setText(TabelaProprietario.aux.getEmail());
         tfTelefone.setText(String.valueOf(TabelaProprietario.aux.getTelefone()));
         tfCEP.setText(String.valueOf(TabelaProprietario.aux.getCEP()));
+
+        MaskFieldUtil.cepField(this.tfCEP);
+
         tfLogradouro.setText(TabelaProprietario.aux.getLogradouro());
         tfNumero.setText(String.valueOf(TabelaProprietario.aux.getNumero()));
         tfBairro.setText(TabelaProprietario.aux.getBairro());
         tfCidade.setText(TabelaProprietario.aux.getCidade());
         tfEstado.setText(TabelaProprietario.aux.getEstado());
-        tfCEP.focusedProperty().addListener(new ChangeListener<Boolean>() {             @Override
+        tfCEP.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (newValue) {
-                    System.out.println("Textfield on focus");
-                } else {
-
+                if (oldValue && tfCEP.getText().replace("-", "").length() == 8) {
                     String json_str = consultaCep(tfCEP.getText());
                     JSONObject my_obj = new JSONObject(json_str);
                     tfCidade.setText(my_obj.getString("localidade"));

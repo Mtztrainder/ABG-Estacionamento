@@ -5,10 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
@@ -37,7 +34,7 @@ public class TabelaMarca implements Initializable {
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
-        Tabela.setItems(FXCollections.observableArrayList(new MarcaDAL().SelectFilter(tfFiltro.getText())));
+        Tabela.setItems(FXCollections.observableArrayList(new MarcaDAL().Select(tfFiltro.getText())));
     }
 
     public void onActionNovaMarca(ActionEvent actionEvent) throws Exception{
@@ -58,7 +55,7 @@ public class TabelaMarca implements Initializable {
 
     private void CarregarTabela(){
 
-        Tabela.setItems(FXCollections.observableArrayList(new MarcaDAL().SelectAll()));
+        Tabela.setItems(FXCollections.observableArrayList(new MarcaDAL().Select()));
     }
 
 
@@ -82,16 +79,23 @@ public class TabelaMarca implements Initializable {
     public void onActionApagar(ActionEvent actionEvent) {
         if (Tabela.getSelectionModel().getSelectedIndex() > -1)
             aux = Tabela.getSelectionModel().getSelectedItem();
-        if (!new MarcaDAL().dependentes(aux.getId()))
-        {
-            new MarcaDAL().deletar(aux.getId());
-            CarregarTabela();
-        }
-        else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Erro");
-            alert.setContentText("Não foi possível remover! '"+aux.getDescricao()+"' possui dependentes.");
-            alert.showAndWait();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Deseja apagar a marca " + aux.getDescricao());
+
+        if (alert.showAndWait().get() == ButtonType.OK){
+
+            if (!new MarcaDAL().dependentes(aux.getId()))
+            {
+                new MarcaDAL().deletar(aux.getId());
+                CarregarTabela();
+            }
+            else{
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Erro");
+                alert.setContentText("Não foi possível remover! A marca "+aux.getDescricao()+" possui dependentes.");
+                alert.showAndWait();
+            }
         }
     }
 }

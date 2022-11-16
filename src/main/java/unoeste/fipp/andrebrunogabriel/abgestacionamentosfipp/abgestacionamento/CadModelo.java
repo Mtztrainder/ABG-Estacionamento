@@ -30,7 +30,7 @@ public class CadModelo implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         tfCodigo.setText(String.valueOf(TabelaModelo.aux.getId()));
         tfDesc.setText(TabelaModelo.aux.getDescricao());
-        cbMarca.setItems(FXCollections.observableArrayList(new MarcaDAL().SelectAll()));
+        cbMarca.setItems(FXCollections.observableArrayList(new MarcaDAL().Select()));
 
         Platform.runLater(
                 () -> {
