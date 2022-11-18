@@ -161,7 +161,11 @@ public abstract class MaskFieldUtil {
             String value = textField.getText();
             value = value.replaceAll("[^0-9]", "");
             value = value.replaceFirst("(\\d{5})(\\d)", "$1-$2");
-            textField.setText(value);
+            String finalValue = value;
+            Platform.runLater(() -> {
+                textField.setText(finalValue);
+            });
+
             MaskFieldUtil.positionCaret(textField);
         }
         );
