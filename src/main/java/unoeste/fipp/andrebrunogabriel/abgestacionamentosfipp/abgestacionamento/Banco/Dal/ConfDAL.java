@@ -4,6 +4,7 @@ import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.B
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Conf;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ConfDAL{
@@ -13,11 +14,9 @@ public class ConfDAL{
             String sql = "select count(1) from conf";
             Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
-
-            if (!Banco.getConexao().manipular(pstmt.toString())) {
-                System.out.println(Banco.getConexao().getMensagemErro());
-            }
-            else{
+            ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
+            rs.next();
+            if (rs.getInt(1) == 0) {
                 Conf conf = new Conf();
 
                 sql = "insert into conf (conf_valorhora, conf_valoradic, conf_carencia) values (?, ?, ?)";
@@ -34,6 +33,22 @@ public class ConfDAL{
         }catch(SQLException sqlex){
             System.out.println("Erro: "+ sqlex.getMessage());
         }
+    }
+
+    public Conf Select(){
+        try{
+            String sql = "select conf_valorhora, conf_valoradic, conf_carencia from conf";
+            Banco.Conectar();
+            PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
+            ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
+            rs.next();
+            return new Conf(rs.getDouble(1), rs.getDouble(2), rs.getInt(3));
+
+        }catch(SQLException sqlex){
+            System.out.println("Erro: "+ sqlex.getMessage());
+        }
+
+        return null;
     }
 
     public boolean altera(Conf conf){

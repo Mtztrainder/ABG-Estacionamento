@@ -52,7 +52,14 @@ public class Menu extends Application {
     }
 
     public void onActionValores(ActionEvent actionEvent) throws Exception {
-        AlteraPainel("TabelaValores.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadValores.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Alterar Valores");
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.showAndWait();
     }
 
     public void onActionSair(ActionEvent actionEvent) {

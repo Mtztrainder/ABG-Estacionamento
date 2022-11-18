@@ -8,14 +8,6 @@
 
 <AnchorPane prefHeight="367.0" prefWidth="483.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.CadValores">
    <children>
-      <Label layoutX="32.0" layoutY="38.0" prefHeight="17.0" prefWidth="67.0" text="Código">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <TextField fx:id="tfCodigo" alignment="CENTER_RIGHT" editable="false" layoutX="32.0" layoutY="55.0" prefHeight="25.0" prefWidth="67.0">
-         <font>
-            <Font size="14.0" />
-         </font></TextField>
       <Label layoutX="32.0" layoutY="91.0" prefHeight="17.0" prefWidth="149.0" text="Valor Hora">
          <font>
             <Font size="14.0" />
@@ -34,12 +26,12 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Label layoutX="32.0" layoutY="148.0" prefHeight="17.0" prefWidth="149.0" text="Valor Hora Extra">
+      <Label layoutX="32.0" layoutY="148.0" prefHeight="17.0" prefWidth="149.0" text="Valor Hora Adicional">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="tfValorHoraExtra" alignment="CENTER_RIGHT" layoutX="32.0" layoutY="165.0" prefHeight="30.0" prefWidth="149.0">
+      <TextField fx:id="tfValorHoraAdicional" alignment="CENTER_RIGHT" layoutX="32.0" layoutY="165.0" prefHeight="30.0" prefWidth="149.0">
          <font>
             <Font size="14.0" />
          </font>
