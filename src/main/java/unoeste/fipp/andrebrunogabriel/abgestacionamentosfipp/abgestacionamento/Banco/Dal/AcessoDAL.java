@@ -32,12 +32,17 @@ public class AcessoDAL{
     }
 
     public boolean RegistrarSaida(Veiculo veiculo, LocalDateTime dh) {
-        String sql ="update acesso set ac_horasaida";
+        String sql ="update acesso " +
+                    "set ac_horasaida = ?, " +
+                        "ac_valor = ? " +
+                    "where vei_cod = ? " +
+                    "and ac_horasaida is null";
         try{
             Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
-            pstmt.setInt(1, veiculo.getId());
-            pstmt.setString(2, dh.toString());
+            pstmt.setString(1, dh.toString());
+            pstmt.setString(2, "");
+            pstmt.setInt(3, veiculo.getId());
 
             if (!Banco.getConexao().manipular(pstmt.toString())) {
                 System.out.println(Banco.getConexao().getMensagemErro());

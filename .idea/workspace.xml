@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="93c2d754-194c-4792-a8ec-c1d585e0319a" name="Changes" comment="Consertei os selects de veiculo">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_17_2022_11_29_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_17_2022_11_29_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_17_2022_11_32_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_17_2022_11_32_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Formatacoes/MaskFieldUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Formatacoes/MaskFieldUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Banco/Dal/AcessoDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Banco/Dal/AcessoDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Banco/Dal/ConfDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Banco/Dal/ConfDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Dados/Conf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Dados/Conf.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
