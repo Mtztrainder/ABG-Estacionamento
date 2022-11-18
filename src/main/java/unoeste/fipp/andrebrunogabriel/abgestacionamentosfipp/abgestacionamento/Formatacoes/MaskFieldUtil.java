@@ -2,9 +2,9 @@ package unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.
 
 
 /*
-Autor: Rog�rio M. de Queiroz 
+Autor: Rogério M. de Queiroz
 modificado por Silvio A. Carro
-
+modificado por Bruno A. da S. Melo e Gabriel B. Salvador
 */
 
 import java.math.BigDecimal;
@@ -50,7 +50,12 @@ public abstract class MaskFieldUtil {
                 value = value.replaceFirst("(\\w{5})(\\w)", "$1-$2");
                 value = value.replaceFirst("(\\w{5})\\-(\\w{5})(\\w)", "$1-$2-$3");
                 value = value.replaceFirst("(\\w{5})\\-(\\w{5})\\-(\\w{5})(\\w)", "$1-$2-$3-$4");
-                textField.setText(value.toUpperCase());
+
+                String finalValue = value;
+                Platform.runLater(() -> {
+                    textField.setText(finalValue.toUpperCase());
+                });
+
                 MaskFieldUtil.positionCaret(textField);
             }
         });
@@ -67,7 +72,12 @@ public abstract class MaskFieldUtil {
                     value = value.replaceAll("[^0-9]", "");
                     value = value.replaceFirst("(\\d{2})(\\d)", "$1/$2");
                     value = value.replaceFirst("(\\d{2})\\/(\\d{2})(\\d)", "$1/$2/$3");
-                    textField.setText(value);
+
+                    String finalValue = value;
+                    Platform.runLater(() -> {
+                        textField.setText(finalValue);
+                    });
+
                     MaskFieldUtil.positionCaret(textField);
                 }
             }
@@ -149,7 +159,12 @@ public abstract class MaskFieldUtil {
                 value = value.replaceFirst("(\\d{3})(\\d)", "$1/$2");
                 value = value.replaceFirst("(\\d{4})(\\d)", "$1-$2");
             }
-            textField.setText(value);
+
+            String finalValue = value;
+            Platform.runLater(() -> {
+                textField.setText(finalValue);
+            });
+
             MaskFieldUtil.positionCaret(textField);
         }
         );
@@ -161,6 +176,7 @@ public abstract class MaskFieldUtil {
             String value = textField.getText();
             value = value.replaceAll("[^0-9]", "");
             value = value.replaceFirst("(\\d{5})(\\d)", "$1-$2");
+
             String finalValue = value;
             Platform.runLater(() -> {
                 textField.setText(finalValue);
@@ -172,19 +188,23 @@ public abstract class MaskFieldUtil {
     }
 
     public static void foneField(TextField textField) {
-        MaskFieldUtil.maxField(textField, 14);
+        MaskFieldUtil.maxField(textField, 15);
         textField.lengthProperty().addListener((observableValue, number, number2) -> {
             try {
                 String value = textField.getText();
                 value = value.replaceAll("[^0-9]", "");
                 int tam = value.length();
-                value = value.replaceFirst("(\\d{2})(\\d)", "($1)$2");
+                value = value.replaceFirst("(\\d{2})(\\d)", "($1) $2");
                 value = value.replaceFirst("(\\d{4})(\\d)", "$1-$2");
                 if (tam > 10) {
                     value = value.replaceAll("-", "");
                     value = value.replaceFirst("(\\d{5})(\\d)", "$1-$2");
                 }
-                textField.setText(value);
+                String finalValue = value;
+                Platform.runLater(() -> {
+                    textField.setText(finalValue);
+                });
+
                 MaskFieldUtil.positionCaret(textField);
 
             } catch (Exception ex) {
@@ -201,10 +221,13 @@ public abstract class MaskFieldUtil {
             value = value.replaceFirst("(\\d{3})(\\d)", "$1.$2");
             value = value.replaceFirst("(\\d{3})(\\d)", "$1.$2");
             value = value.replaceFirst("(\\d{3})(\\d)", "$1-$2");
-            try {
-            textField.setText(value);
+
+            String finalValue = value;
+            Platform.runLater(() -> {
+                textField.setText(finalValue);
+            });
+
             MaskFieldUtil.positionCaret(textField);
-            }catch(Exception ex){}
         }
         );
     }
@@ -218,7 +241,12 @@ public abstract class MaskFieldUtil {
             value = value.replaceFirst("(\\d{3})(\\d)", "$1.$2");
             value = value.replaceFirst("(\\d{3})(\\d)", "$1/$2");
             value = value.replaceFirst("(\\d{4})(\\d)", "$1-$2");
-            textField.setText(value);
+
+            String finalValue = value;
+            Platform.runLater(() -> {
+                textField.setText(finalValue);
+            });
+
             MaskFieldUtil.positionCaret(textField);
         }
         );
@@ -236,7 +264,9 @@ public abstract class MaskFieldUtil {
     public static void maxField(TextField textField, Integer length) {
         textField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue == null || newValue.length() > length) {
-                textField.setText(oldValue);
+                Platform.runLater(() -> {
+                    textField.setText(oldValue);
+                });
             }
         }
         );

@@ -60,20 +60,19 @@ public class CadProprietario implements Initializable {
         tfCodigo.setText(String.valueOf(TabelaProprietario.aux.getId()));
         tfNome.setText(TabelaProprietario.aux.getNome());
         tfCPF.setText(TabelaProprietario.aux.getCPF());
-
-        MaskFieldUtil.cpfField(this.tfCPF);
-
         tfEmail.setText(TabelaProprietario.aux.getEmail());
         tfTelefone.setText(String.valueOf(TabelaProprietario.aux.getTelefone()));
         tfCEP.setText(String.valueOf(TabelaProprietario.aux.getCEP()));
-
-        MaskFieldUtil.cepField(this.tfCEP);
-
         tfLogradouro.setText(TabelaProprietario.aux.getLogradouro());
         tfNumero.setText(String.valueOf(TabelaProprietario.aux.getNumero()));
         tfBairro.setText(TabelaProprietario.aux.getBairro());
         tfCidade.setText(TabelaProprietario.aux.getCidade());
         tfEstado.setText(TabelaProprietario.aux.getEstado());
+
+        MaskFieldUtil.foneField(this.tfTelefone);
+        MaskFieldUtil.cpfField(this.tfCPF);
+        MaskFieldUtil.cepField(this.tfCEP);
+
         tfCEP.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
