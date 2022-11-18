@@ -85,7 +85,8 @@ public class MarcaDAL implements IDAL<Marca>{
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
             rs.next();
 
-            m = new Marca(rs.getInt("mar_cod"), rs.getString("mar_desc"));
+            m = new Marca(rs.getInt("mar_cod"),
+                          rs.getString("mar_desc"));
         }catch(SQLException sqlex){
             System.out.println("Erro: "+ sqlex.getMessage());
         }
@@ -101,7 +102,8 @@ public class MarcaDAL implements IDAL<Marca>{
         try {
             while(rs.next())
             {
-                listaMarcas.add(new Marca(rs.getInt("mar_cod"), rs.getString("mar_desc")));
+                listaMarcas.add(new Marca(rs.getInt("mar_cod"),
+                                          rs.getString("mar_desc")));
             }
         }
         catch (Exception e){}
@@ -120,7 +122,8 @@ public class MarcaDAL implements IDAL<Marca>{
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
             while(rs.next())
             {
-                listaMarcas.add(new Marca(rs.getInt("mar_cod"), rs.getString("mar_desc")));
+                listaMarcas.add(new Marca(rs.getInt("mar_cod"),
+                                          rs.getString("mar_desc")));
             }
         }catch(SQLException sqlex){
             System.out.println("Erro: "+ sqlex.getMessage());

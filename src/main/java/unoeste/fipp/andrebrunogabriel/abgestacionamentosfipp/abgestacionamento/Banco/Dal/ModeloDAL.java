@@ -103,7 +103,9 @@ public class ModeloDAL implements IDAL<Modelo> {
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
             rs.next();
 
-            m = new Modelo(rs.getInt("mod_cod"), rs.getString("mod_desc"), new Marca(rs.getInt("mar_cod"), rs.getString("mar_desc")));
+            m = new Modelo(rs.getInt("mod_cod"),
+                           rs.getString("mod_desc"),
+                           new MarcaDAL().Select(rs.getInt("mar_cod")));
 
         }catch(SQLException sqlex){
             System.out.println("Erro: "+ sqlex.getMessage());
@@ -120,7 +122,10 @@ public class ModeloDAL implements IDAL<Modelo> {
         try {
             while(rs.next())
             {
-                listaModelos.add(new Modelo(rs.getInt("mod_cod"), rs.getString("mod_desc"), new Marca(rs.getInt("mar_cod"), rs.getString("mar_desc"))));
+                listaModelos.add(new Modelo(rs.getInt("mod_cod"),
+                                            rs.getString("mod_desc"),
+                                            new Marca(rs.getInt("mar_cod"),
+                                                      rs.getString("mar_desc"))));
             }
         }
         catch (Exception e){}
@@ -138,7 +143,10 @@ public class ModeloDAL implements IDAL<Modelo> {
             pstmt.setString(1, filtro.toLowerCase() + "%");
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
             while (rs.next()) {
-                listaModelos.add(new Modelo(rs.getInt("mod_cod"), rs.getString("mod_desc"), new Marca(rs.getInt("mar_cod"), rs.getString("mar_desc"))));
+                listaModelos.add(new Modelo(rs.getInt("mod_cod"),
+                                            rs.getString("mod_desc"),
+                                            new Marca(rs.getInt("mar_cod"),
+                                                      rs.getString("mar_desc"))));
             }
         } catch (SQLException sqlex) {
             System.out.println("Erro: " + sqlex.getMessage());

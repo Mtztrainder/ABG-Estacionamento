@@ -120,7 +120,17 @@ public class ProprietarioDAL implements IDAL<Proprietario>{
             pstmt.setInt(1, id);
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
             rs.next();
-            P = new Proprietario(rs.getInt("prop_cod"), rs.getString("prop_cpf"), rs.getString("prop_nome"), rs.getString("prop_email"), rs.getInt("prop_cep"), rs.getString("prop_uf"), rs.getString("prop_cidade"), rs.getString("prop_bairro"), rs.getString("prop_rua"), rs.getString("prop_numero"), rs.getString("prop_fone"));
+            P = new Proprietario(rs.getInt("prop_cod"),
+                                 rs.getString("prop_cpf"),
+                                 rs.getString("prop_nome"),
+                                 rs.getString("prop_email"),
+                                 rs.getInt("prop_cep"),
+                                 rs.getString("prop_uf"),
+                                 rs.getString("prop_cidade"),
+                                 rs.getString("prop_bairro"),
+                                 rs.getString("prop_rua"),
+                                 rs.getString("prop_numero"),
+                                 rs.getString("prop_fone"));
         }catch(SQLException sqlex){
             System.out.println("Erro: "+ sqlex.getMessage());
         }
@@ -136,7 +146,17 @@ public class ProprietarioDAL implements IDAL<Proprietario>{
         try {
             while(rs.next())
             {
-                listaProprietarios.add(new Proprietario(rs.getInt("prop_cod"), rs.getString("prop_cpf"), rs.getString("prop_nome"), rs.getString("prop_email"), rs.getInt("prop_cep"), rs.getString("prop_uf"), rs.getString("prop_cidade"), rs.getString("prop_bairro"), rs.getString("prop_rua"), rs.getString("prop_numero"), rs.getString("prop_fone")));
+                listaProprietarios.add(new Proprietario(rs.getInt("prop_cod"),
+                                                        rs.getString("prop_cpf"),
+                                                        rs.getString("prop_nome"),
+                                                        rs.getString("prop_email"),
+                                                        rs.getInt("prop_cep"),
+                                                        rs.getString("prop_uf"),
+                                                        rs.getString("prop_cidade"),
+                                                        rs.getString("prop_bairro"),
+                                                        rs.getString("prop_rua"),
+                                                        rs.getString("prop_numero"),
+                                                        rs.getString("prop_fone")));
             }
         }
         catch (Exception e){}
@@ -155,7 +175,17 @@ public class ProprietarioDAL implements IDAL<Proprietario>{
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
             while(rs.next())
             {
-                listaProprietarios.add(new Proprietario(rs.getInt("prop_cod"), rs.getString("prop_cpf"), rs.getString("prop_nome"), rs.getString("prop_email"), rs.getInt("prop_cep"), rs.getString("prop_uf"), rs.getString("prop_cidade"), rs.getString("prop_bairro"), rs.getString("prop_rua"), rs.getString("prop_numero"), rs.getString("prop_fone")));
+                listaProprietarios.add(new Proprietario(rs.getInt("prop_cod"),
+                                                        rs.getString("prop_cpf"),
+                                                        rs.getString("prop_nome"),
+                                                        rs.getString("prop_email"),
+                                                        rs.getInt("prop_cep"),
+                                                        rs.getString("prop_uf"),
+                                                        rs.getString("prop_cidade"),
+                                                        rs.getString("prop_bairro"),
+                                                        rs.getString("prop_rua"),
+                                                        rs.getString("prop_numero"),
+                                                        rs.getString("prop_fone")));
             }
         }catch(SQLException sqlex){
             System.out.println("Erro: "+ sqlex.getMessage());

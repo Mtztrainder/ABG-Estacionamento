@@ -78,12 +78,28 @@ public class CadProprietario implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (oldValue && tfCEP.getText().replace("-", "").length() == 8) {
-                    String json_str = consultaCep(tfCEP.getText());
-                    JSONObject my_obj = new JSONObject(json_str);
-                    tfCidade.setText(my_obj.getString("localidade"));
-                    tfBairro.setText(my_obj.getString("bairro"));
-                    tfLogradouro.setText(my_obj.getString("logradouro"));
-                    tfEstado.setText(my_obj.getString("uf"));
+
+                    tfCidade.setText("");
+                    tfBairro.setText("");
+                    tfLogradouro.setText("");
+                    tfEstado.setText("");
+
+                    try{
+                        String json_str = consultaCep(tfCEP.getText());
+                        JSONObject my_obj = new JSONObject(json_str);
+                        if (my_obj.has("erro"))
+                        {
+                            System.out.println("CEP INEXISTENTE");
+                        }
+                        else {
+                            tfCidade.setText(my_obj.getString("localidade"));
+                            tfBairro.setText(my_obj.getString("bairro"));
+                            tfLogradouro.setText(my_obj.getString("logradouro"));
+                            tfEstado.setText(my_obj.getString("uf"));
+                        }
+                    }catch (Exception e){
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
         });
