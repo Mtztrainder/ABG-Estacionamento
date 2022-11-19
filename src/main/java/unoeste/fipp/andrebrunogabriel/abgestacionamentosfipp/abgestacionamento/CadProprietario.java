@@ -69,6 +69,9 @@ public class CadProprietario implements Initializable {
         tfCidade.setText(TabelaProprietario.aux.getCidade());
         tfEstado.setText(TabelaProprietario.aux.getEstado());
 
+        if (!tfCEP.getText().isEmpty() && Integer.parseInt(tfCEP.getText()) == 0)
+            tfCEP.setText("");
+
         MaskFieldUtil.foneField(this.tfTelefone);
         MaskFieldUtil.cpfField(this.tfCPF);
         MaskFieldUtil.cepField(this.tfCEP);
@@ -99,6 +102,12 @@ public class CadProprietario implements Initializable {
                     }catch (Exception e){
                         System.out.println(e.getMessage());
                     }
+                }
+                else{
+                    tfCidade.setText("");
+                    tfBairro.setText("");
+                    tfLogradouro.setText("");
+                    tfEstado.setText("");
                 }
             }
         });
@@ -132,27 +141,33 @@ public class CadProprietario implements Initializable {
                 alert.setContentText("Erro ao gravar: " + Banco.getConexao().getMensagemErro());
                 alert.showAndWait();
             }
+
+            tfNome.setText("");
+            tfCPF.setText("");
+            tfEmail.setText("");
+            tfTelefone.setText("");
+            tfCEP.setText("");
+            tfLogradouro.setText("");
+            tfNumero.setText("");
+            tfBairro.setText("");
+            tfCidade.setText("");
+            tfEstado.setText("");
+
         }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+
             p.setId(Integer.parseInt(tfCodigo.getText()));
             if(!new ProprietarioDAL().alterar(p))
             {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Erro ao gravar: " + Banco.getConexao().getMensagemErro());
                 alert.showAndWait();
             }
+            else{
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setContentText("Registro alterado com sucesso!");
+                alert.showAndWait();
+            }
         }
-
-
-        tfNome.setText("");
-        tfCPF.setText("");
-        tfEmail.setText("");
-        tfTelefone.setText("");
-        tfCEP.setText("");
-        tfLogradouro.setText("");
-        tfNumero.setText("");
-        tfBairro.setText("");
-        tfCidade.setText("");
-        tfEstado.setText("");
     }
 
     public void onActionCancelar(ActionEvent actionEvent) {

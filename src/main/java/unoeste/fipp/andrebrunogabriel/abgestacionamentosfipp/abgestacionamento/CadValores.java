@@ -32,36 +32,75 @@ public class CadValores implements Initializable {
         tfCarencia.setText(String.valueOf(conf.getCarencia()));
         tfValorHoraAdicional.setText(String.valueOf(conf.getValorAdic()));
 
-        MaskFieldUtil.onlyDigitsValue(this.tfCarencia);
-
         Platform.runLater(
                 () -> {
                     tfValorHora.requestFocus();
+
+                    MaskFieldUtil.monetaryField(this.tfValorHora);
+                    MaskFieldUtil.monetaryField(this.tfValorHoraAdicional);
+                    MaskFieldUtil.onlyDigitsValue(this.tfCarencia);
                 }
         );
     }
 
     public void onActionConfirmar(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+
         if (!tfValorHora.getText().isEmpty() &&
             !tfValorHoraAdicional.getText().isEmpty() &&
             !tfCarencia.getText().isEmpty()
         ){
-            conf.setValorHora(Double.parseDouble(tfValorHora.getText()));
-            conf.setValorAdic(Double.parseDouble(tfValorHoraAdicional.getText()));
-            conf.setCarencia(Integer.parseInt(tfCarencia.getText()));
+            double ValorHora = MaskFieldUtil.monetaryValueFromField(tfValorHora).doubleValue(),
+                   ValorAdic = MaskFieldUtil.monetaryValueFromField(tfValorHoraAdicional).doubleValue();
+            int Carencia = Integer.parseInt(tfCarencia.getText());
 
-            if(!new ConfDAL().altera(conf))
-            {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Erro ao gravar: " + Banco.getConexao().getMensagemErro());
+            if (ValorHora >= 0 && ValorAdic >= 0 && Carencia >= 0){
+                conf.setValorHora(ValorHora);
+                conf.setValorAdic(ValorAdic);
+                conf.setCarencia(Carencia);
+
+                if(!new ConfDAL().altera(conf)) {
+
+                    alert.setContentText("Erro ao gravar: " + Banco.getConexao().getMensagemErro());
+                    alert.showAndWait();
+                }else{
+                    alert.setAlertType(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Registro Atualizado com sucesso!");
+                    alert.showAndWait();
+                }
+            }
+            else{
+                if (ValorHora < 0){
+                    alert.setContentText("Valor Hora inválido!");
+                }
+                else{
+                    if (ValorAdic < 0){
+                        alert.setContentText("Valor Adicional inválido!");
+                    }
+                    else{
+                        alert.setContentText("Carência inválida!");
+                    }
+                }
+
                 alert.showAndWait();
             }
         }
         else
         {
+            if (tfValorHora.getText().isEmpty()){
+                alert.setContentText("Valor Hora inválido!");
+            }
+            else{
+                if (tfValorHora.getText().isEmpty()){
+                    alert.setContentText("Valor Adicional inválido!");
+                }
+                else{
+                    alert.setContentText("Carência inválida!");
+                }
+            }
 
+            alert.showAndWait();
         }
-        onActionCancelar(actionEvent);
     }
 
     public void onActionCancelar(ActionEvent actionEvent) {

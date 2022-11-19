@@ -164,7 +164,6 @@ public abstract class MaskFieldUtil {
             Platform.runLater(() -> {
                 textField.setText(finalValue);
             });
-
             MaskFieldUtil.positionCaret(textField);
         }
         );
