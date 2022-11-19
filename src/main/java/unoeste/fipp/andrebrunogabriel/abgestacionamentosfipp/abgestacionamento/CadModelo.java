@@ -34,6 +34,7 @@ public class CadModelo implements Initializable {
 
         Platform.runLater(
                 () -> {
+                    cbMarca.setValue(TabelaModelo.aux.getMarca());
                     tfDesc.requestFocus();
                 }
         );

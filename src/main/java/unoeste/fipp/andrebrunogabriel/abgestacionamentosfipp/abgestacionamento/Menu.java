@@ -35,6 +35,17 @@ public class Menu extends Application {
         Painel.setCenter(fxmlLoader.load());
     }
 
+    public void ExibePOPUP(String XMLName, String Titulo) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource(XMLName));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setTitle(Titulo);
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.showAndWait();
+    }
+
     public void onActionMarca(ActionEvent actionEvent) throws Exception {
         AlteraPainel("TabelaMarca.fxml");
     }
@@ -52,14 +63,15 @@ public class Menu extends Application {
     }
 
     public void onActionValores(ActionEvent actionEvent) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadValores.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setTitle("Alterar Valores");
-        stage.setScene(scene);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setResizable(false);
-        stage.showAndWait();
+        ExibePOPUP("CadValores.fxml", "Alterar Valores");
+    }
+
+    public void onActionEntrada(ActionEvent actionEvent) throws Exception {
+        ExibePOPUP("CadValores.fxml", "Registrar Entrada");
+    }
+
+    public void onActionSaida(ActionEvent actionEvent) throws Exception {
+        ExibePOPUP("CadValores.fxml", "Registrar Saída");
     }
 
     public void onActionSair(ActionEvent actionEvent) {
