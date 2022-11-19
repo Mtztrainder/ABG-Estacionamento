@@ -60,13 +60,13 @@ public class CadValores implements Initializable {
                 conf.setCarencia(Carencia);
 
                 if(!new ConfDAL().altera(conf)) {
-
                     alert.setContentText("Erro ao gravar: " + Banco.getConexao().getMensagemErro());
                     alert.showAndWait();
                 }else{
                     alert.setAlertType(Alert.AlertType.INFORMATION);
                     alert.setContentText("Registro Atualizado com sucesso!");
                     alert.showAndWait();
+                    onActionCancelar(actionEvent);
                 }
             }
             else{

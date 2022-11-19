@@ -52,7 +52,7 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="tfCEP" layoutX="52.0" layoutY="215.0" onInputMethodTextChanged="#onCEPChanged" prefHeight="30.0" prefWidth="149.0" promptText="Digite o CEP">
+      <TextField fx:id="tfCEP" layoutX="52.0" layoutY="215.0" prefHeight="30.0" prefWidth="149.0" promptText="Digite o CEP">
          <font>
             <Font size="14.0" />
          </font></TextField>

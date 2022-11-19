@@ -173,10 +173,4 @@ public class CadProprietario implements Initializable {
     public void onActionCancelar(ActionEvent actionEvent) {
         ((Node) actionEvent.getSource()).getScene().getWindow().hide();
     }
-
-    public void onCEPChanged(InputMethodEvent inputMethodEvent) {
-        if (!tfCEP.getText().isEmpty()){
-
-        }
-    }
 }
