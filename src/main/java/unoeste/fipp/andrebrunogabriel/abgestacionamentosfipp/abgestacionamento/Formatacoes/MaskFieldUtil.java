@@ -15,6 +15,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
+
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -250,6 +252,42 @@ public abstract class MaskFieldUtil {
         }
         );
     }
+
+    public static void placaVeiculofield(TextField textField) {
+        MaskFieldUtil.maxField(textField, 8);
+
+        textField.lengthProperty().addListener((observableValue, number, number2) -> {
+                String value = textField.getText().toUpperCase();
+                //remove qualquer coisa que não seja de 0-9 e A-Z
+                value = value.replaceAll("[^0-9A-Z]", "");
+
+                //verifica se placa lenght da placa == 8, ou seja, foi informado algum digito a mais além do "-" adicionado
+                if (value.length() == 8){
+                    //consequentemente, limita a quantidade
+                    value = value.substring(0, 7);
+                }
+
+                //altera para o formato antigo (XXX-9999)
+                value = value.replaceAll("([A-Z]{3})([0-9]{4})$", "$1-$2");
+
+                //altera para o formato novo (XXX9X99)
+                value = value.replaceAll("([A-Z]{3})([0-9])([A-Z])([0-9]{2})$", "$1$2$3$4");
+
+                String finalValue = value;
+                Platform.runLater(() -> {
+                    textField.setText(finalValue);
+                });
+
+                MaskFieldUtil.positionCaret(textField);
+            }
+        );
+    }
+
+    public static boolean PlacaValida(TextField textField){
+        return Pattern.matches("[A-Z]{3}-[0-9]{4}", textField.getText()) ||
+               Pattern.matches("[A-Z]{3}[0-9][A-Z][0-9]{2}", textField.getText());
+    }
+
 
     private static void positionCaret(TextField textField) {
         Platform.runLater(() -> {

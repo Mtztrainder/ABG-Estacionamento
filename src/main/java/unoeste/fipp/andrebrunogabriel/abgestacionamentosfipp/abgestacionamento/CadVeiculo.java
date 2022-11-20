@@ -14,6 +14,7 @@ import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.B
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.VeiculoDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Util.Banco;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.*;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Formatacoes.MaskFieldUtil;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,6 +38,8 @@ public class CadVeiculo implements Initializable {
         cbProprietario.setItems(FXCollections.observableArrayList(new ProprietarioDAL().Select()));
         cbCor.setItems(FXCollections.observableArrayList(Singleton.ListaCores));
 
+        MaskFieldUtil.placaVeiculofield(tfPlaca);
+
         Platform.runLater(
                 () -> {
                     cbModelo.setValue(TabelaVeiculo.aux.getModelo());
@@ -59,14 +62,17 @@ public class CadVeiculo implements Initializable {
         }
         else
         {
-            if (cbModelo.getValue() == null)
-                alert.setContentText("O Modelo não pode estar em branco.");
+            if (!MaskFieldUtil.PlacaValida(tfPlaca))
+                alert.setContentText("Placa inválida.");
             else
-                if (cbCor.getValue() == null)
-                    alert.setContentText("A Cor não pode estar em branco.");
+                if (cbModelo.getValue() == null)
+                    alert.setContentText("O Modelo não pode estar em branco.");
                 else
-                    if (cbProprietario.getValue() == null)
-                        alert.setContentText("O Proprietário não pode estar em branco.");
+                    if (cbCor.getValue() == null)
+                        alert.setContentText("A Cor não pode estar em branco.");
+                    else
+                        if (cbProprietario.getValue() == null)
+                            alert.setContentText("O Proprietário não pode estar em branco.");
 
         }
         alert.showAndWait();
@@ -84,6 +90,7 @@ public class CadVeiculo implements Initializable {
         if(tfCodigo.getText().equals("0"))
         {
             if(!tfPlaca.getText().isEmpty() &&
+                    MaskFieldUtil.PlacaValida(tfPlaca) &&
                     cbCor.getValue() != null &&
                     cbProprietario.getValue() != null &&
                     cbModelo.getValue() != null)
@@ -104,6 +111,7 @@ public class CadVeiculo implements Initializable {
             v.setId(Integer.parseInt(tfCodigo.getText()));
 
             if(!tfPlaca.getText().isEmpty() &&
+                MaskFieldUtil.PlacaValida(tfPlaca)    &&
                 cbCor.getValue() != null &&
                 cbProprietario.getValue() != null &&
                 cbModelo.getValue() != null)
@@ -114,7 +122,6 @@ public class CadVeiculo implements Initializable {
                     alert.setContentText("Erro ao gravar: " + Banco.getConexao().getMensagemErro());
                     alert.showAndWait();
                 }
-
                 onActionCancelar(actionEvent);
             }
             else{
