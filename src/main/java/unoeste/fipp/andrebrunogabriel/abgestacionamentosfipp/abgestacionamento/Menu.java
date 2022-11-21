@@ -19,6 +19,7 @@ public class Menu extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("Menu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(getClass().getResource("estilo.css").toExternalForm());
         stage.setTitle("ABG - Estacionamentos");
         stage.setScene(scene);
         stage.setMaximized(true);

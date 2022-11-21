@@ -10,21 +10,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.TabelaMarca">
+
+<VBox prefHeight="480.0" prefWidth="640.0" style="-fx-padding: 15px; -fx-background-color: #e9f0f7;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.TabelaMarca">
    <children>
-      <HBox alignment="CENTER" prefHeight="79.0" prefWidth="640.0" spacing="20.0" style="-fx-background-color: gray;">
+      <HBox fx:id="hbMarca" alignment="CENTER" prefHeight="79.0" prefWidth="640.0" spacing="20.0" style="-fx-background-color: #e9f0f7;">
          <children>
             <TextField fx:id="tfFiltro" onKeyTyped="#onKeyTyped" prefHeight="25.0" prefWidth="336.0" promptText="Digite o nome da marca">
                <font>
                   <Font size="14.0" />
-               </font></TextField>
-            <Button mnemonicParsing="false" onAction="#onActionNovaMarca" text="Nova Marca">
+               </font>
+            </TextField>
+            <Button fx:id="novaMarca" mnemonicParsing="false" onAction="#onActionNovaMarca" text="Nova Marca">
                <font>
                   <Font size="14.0" />
-               </font></Button>
+               </font>
+            </Button>
          </children>
       </HBox>
-      <TableView fx:id="Tabela" prefHeight="297.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
+      <TableView fx:id="Tabela" prefHeight="346.0" prefWidth="557.0" VBox.vgrow="ALWAYS">
         <columns>
           <TableColumn fx:id="colCodigo" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="ID" />
           <TableColumn fx:id="colDescricao" minWidth="0.0" prefWidth="376.0" text="Descrição" />

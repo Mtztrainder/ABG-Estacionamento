@@ -2,14 +2,19 @@ package unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.MarcaDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Util.Banco;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Marca;
@@ -19,6 +24,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TabelaMarca implements Initializable {
+    private static double xOffset = 0;
+    private static double yOffset = 0;
     public TextField tfFiltro;
     public TableView <Marca>Tabela;
     public TableColumn <Marca, Integer>colCodigo;
@@ -26,6 +33,16 @@ public class TabelaMarca implements Initializable {
 
     public static Marca aux = new Marca();
 
+
+    public void moveScreen(Scene scene, Stage stage)
+    {
+        scene.setOnMousePressed(pressEvent -> {
+            scene.setOnMouseDragged(dragEvent -> {
+                stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+                stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+            });
+        });
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colCodigo.setCellValueFactory(new PropertyValueFactory<Marca, Integer>("Id"));
@@ -41,11 +58,17 @@ public class TabelaMarca implements Initializable {
         aux = new Marca();
         FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadMarca.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-
+        scene.getStylesheets().add(getClass().getResource("estilo.css").toExternalForm());
         Stage stage = new Stage();
+
+
+
+        moveScreen(scene,stage);
+
         stage.setTitle("Nova Marca");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
 
         stage.setResizable(false);
         stage.showAndWait();
@@ -67,10 +90,15 @@ public class TabelaMarca implements Initializable {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadMarca.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(getClass().getResource("estilo.css").toExternalForm());
+
         Stage stage = new Stage();
+
+        moveScreen(scene,stage);
         stage.setTitle("Alterar Marca");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.showAndWait();
         CarregarTabela();
