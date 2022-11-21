@@ -12,6 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorPane" prefHeight="333.0" prefWidth="477.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.CadMarca">
+
    <children>
       <Pane nodeOrientation="RIGHT_TO_LEFT" prefHeight="353.0" prefWidth="145.0" style="-fx-background-color: #4b99c7;">
          <children>

@@ -1,10 +1,19 @@
-#tfDesc, #tfCodigo, #tfFiltro{
-   -fx-font-family: "Quicksand";
+@font-face {
+    font-family: 'Barlow Condensed', sans-serif;
+    src: url('../../../../../fonts/BarlowCondensed-Regular.ttf');
+}
+* {
+    -fx-font-family: "Barlow Condensed";
+}
+
+TextField, ComboBox{
+
    -fx-font-size: 15;
    -fx-border-color: grey;
    -fx-border-width: 0 0 1 0;
    -fx-background-color: transparent;
 }
+
 
 #tfDesc:focused,  #tfCodigo:focused{
     -fx-focus-color: transparent;
@@ -21,7 +30,7 @@
     -fx-cursor: hand;
 }
 
-#btConfirmar, #novaMarca, #btCancelar{
+Button{
     -fx-text-fill: #ffffff;
     -fx-font-size: 15;
     -fx-font-weight: bold;
