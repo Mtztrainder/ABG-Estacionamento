@@ -6,11 +6,19 @@ import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.D
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class AcessoDAL{
+
+    private LocalDateTime DataValida(Timestamp ts){
+        if (ts != null)
+            return ts.toLocalDateTime();
+        return null;
+    }
     public boolean RegistrarEntrada(Veiculo veiculo, LocalDateTime dh) {
         String sql ="insert into acesso(vei_cod, ac_horaentrada) values (?, ?)";
         try{
@@ -62,7 +70,10 @@ public class AcessoDAL{
         Acesso ac = null;
 
         try{
-            String sql = "select * from acesso ac inner join veiculo vec on ac.vei_cod = vec.vei_cod where ac_cod = ? ";
+            String sql = "select * from acesso ac " +
+                    "inner join veiculo vec on ac.vei_cod = vec.vei_cod " +
+                    "where ac_cod = ? " +
+                    "order by ac_cod desc ";
             Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
@@ -70,10 +81,13 @@ public class AcessoDAL{
             rs.next();
 
             ac = new Acesso(rs.getInt("ac_cod"),
-                    new VeiculoDAL().Select(rs.getInt("vei_cod")),
-                     rs.getTimestamp("ac_horaentrada").toLocalDateTime(),
-                    rs.getTimestamp("ac_horasaida").toLocalDateTime(),
-                     rs.getDouble("ac_valor"));
+                            new VeiculoDAL().Select(
+                                                    rs.getInt("vei_cod")
+                            ),
+                            DataValida(rs.getTimestamp("ac_horaentrada")),
+                            DataValida(rs.getTimestamp("ac_horasaida")),
+                            rs.getDouble("ac_valor")
+            );
 
         }catch(SQLException sqlex){
             System.out.println("Erro: "+ sqlex.getMessage());
@@ -84,45 +98,44 @@ public class AcessoDAL{
 
     public List<Acesso> Select() {
         List<Acesso> listaAcesso = new ArrayList<Acesso>();
-        String sql = "SELECT * FROM ACESSO AC INNER JOIN VEICULO VEC" +
-                "ON AC.VEI_COD = VEC.VEI_COD" +
+        String sql = "SELECT * FROM ACESSO AC " +
+                "INNER JOIN VEICULO VEC ON AC.VEI_COD = VEC.VEI_COD " +
                 "INNER JOIN MODELO MO ON MO.MOD_COD = VEC.MOD_COD "+
                 "INNER JOIN MARCA MA ON MA.MAR_COD = MO.MAR_COD "+
-                "INNER JOIN PROPRIETARIO PR ON PR.PROP_COD = VEC.PROP_COD ";
-
-
+                "INNER JOIN PROPRIETARIO PR ON PR.PROP_COD = VEC.PROP_COD " +
+                "order by ac_cod desc ";
         Banco.Conectar();
         ResultSet rs = Banco.getConexao().consultar(sql);
         try {
             while(rs.next())
             {
                 listaAcesso.add(new Acesso(rs.getInt("ac_cod"),
-                        new Veiculo(rs.getInt("vei_cod"),
-                                rs.getString("vei_placa"),
-                                rs.getString("vei_cor"),
-                                new Modelo(rs.getInt("mod_cod"),
-                                        rs.getString("mod_desc"),
-                                        new Marca(rs.getInt("mar_cod"),
-                                                rs.getString("mar_desc"))
-                                ),
-                                new Proprietario(rs.getInt("prop_cod"),
-                                        rs.getString("prop_cpf"),
-                                        rs.getString("prop_nome"),
-                                        rs.getString("prop_email"),
-                                        rs.getInt("prop_cep"),
-                                        rs.getString("prop_uf"),
-                                        rs.getString("prop_cidade"),
-                                        rs.getString("prop_bairro"),
-                                        rs.getString("prop_rua"),
-                                        rs.getString("prop_numero"),
-                                        rs.getString("prop_fone")
-                                    )
-                                ),
-
-
-                                rs.getTimestamp("ac_horaentrada").toLocalDateTime(),
-                                rs.getTimestamp("ac_horasaida").toLocalDateTime(),
-                                rs.getDouble("ac_valor")));
+                                            new Veiculo(rs.getInt("vei_cod"),
+                                                        rs.getString("vei_placa"),
+                                                        rs.getString("vei_cor"),
+                                                        new Modelo(rs.getInt("mod_cod"),
+                                                                rs.getString("mod_desc"),
+                                                                new Marca(rs.getInt("mar_cod"),
+                                                                        rs.getString("mar_desc"))
+                                                        ),
+                                                        new Proprietario(rs.getInt("prop_cod"),
+                                                                rs.getString("prop_cpf"),
+                                                                rs.getString("prop_nome"),
+                                                                rs.getString("prop_email"),
+                                                                rs.getInt("prop_cep"),
+                                                                rs.getString("prop_uf"),
+                                                                rs.getString("prop_cidade"),
+                                                                rs.getString("prop_bairro"),
+                                                                rs.getString("prop_rua"),
+                                                                rs.getString("prop_numero"),
+                                                                rs.getString("prop_fone")
+                                                            )
+                                                        ),
+                                            DataValida(rs.getTimestamp("ac_horaentrada")),
+                                            DataValida(rs.getTimestamp("ac_horasaida")),
+                                            rs.getDouble("ac_valor")
+                        )
+                );
             }
         }
         catch (Exception e){}
@@ -133,42 +146,49 @@ public class AcessoDAL{
     public List<Acesso> Select(String filtro) {
         List<Acesso> listaAcesso = new ArrayList<Acesso>();
 
+        if (!filtro.isEmpty() && !filtro.toUpperCase().contains("WHERE"))
+            filtro = " WHERE "+filtro;
+
         try {
-            String sql = "SELECT * FROM ACESSO AC INNER JOIN VEICULO VEC" +
-                    "ON AC.VEI_COD = VEC.VEI_COD" +
+            String sql = "SELECT * FROM ACESSO AC " +
+                    "INNER JOIN VEICULO VEC ON AC.VEI_COD = VEC.VEI_COD " +
                     "INNER JOIN MODELO MO ON MO.MOD_COD = VEC.MOD_COD "+
                     "INNER JOIN MARCA MA ON MA.MAR_COD = MO.MAR_COD "+
-                    "INNER JOIN PROPRIETARIO PR ON PR.PROP_COD = VEC.PROP_COD WHERE LOWER(VEC.VEI_PLACA) LIKE ?";
+                    "INNER JOIN PROPRIETARIO PR ON PR.PROP_COD = VEC.PROP_COD " +
+                    " "+filtro+" " +
+                    "order by ac_cod desc ";
             Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
-            pstmt.setString(1, filtro.toLowerCase() + "%");
+
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
             while (rs.next()) {
                 listaAcesso.add(new Acesso(rs.getInt("ac_cod"),
-                        new Veiculo(rs.getInt("vei_cod"),
-                                rs.getString("vei_placa"),
-                                rs.getString("vei_cor"),
-                                new Modelo(rs.getInt("mod_cod"),
-                                        rs.getString("mod_desc"),
-                                        new Marca(rs.getInt("mar_cod"),
-                                                rs.getString("mar_desc"))
+                                new Veiculo(rs.getInt("vei_cod"),
+                                        rs.getString("vei_placa"),
+                                        rs.getString("vei_cor"),
+                                        new Modelo(rs.getInt("mod_cod"),
+                                                rs.getString("mod_desc"),
+                                                new Marca(rs.getInt("mar_cod"),
+                                                        rs.getString("mar_desc"))
+                                        ),
+                                        new Proprietario(rs.getInt("prop_cod"),
+                                                rs.getString("prop_cpf"),
+                                                rs.getString("prop_nome"),
+                                                rs.getString("prop_email"),
+                                                rs.getInt("prop_cep"),
+                                                rs.getString("prop_uf"),
+                                                rs.getString("prop_cidade"),
+                                                rs.getString("prop_bairro"),
+                                                rs.getString("prop_rua"),
+                                                rs.getString("prop_numero"),
+                                                rs.getString("prop_fone")
+                                        )
                                 ),
-                                new Proprietario(rs.getInt("prop_cod"),
-                                        rs.getString("prop_cpf"),
-                                        rs.getString("prop_nome"),
-                                        rs.getString("prop_email"),
-                                        rs.getInt("prop_cep"),
-                                        rs.getString("prop_uf"),
-                                        rs.getString("prop_cidade"),
-                                        rs.getString("prop_bairro"),
-                                        rs.getString("prop_rua"),
-                                        rs.getString("prop_numero"),
-                                        rs.getString("prop_fone")
-                                )
-                        ),
-                        rs.getTimestamp("ac_horaentrada").toLocalDateTime(),
-                        rs.getTimestamp("ac_horasaida").toLocalDateTime(),
-                        rs.getDouble("ac_valor")));
+                                DataValida(rs.getTimestamp("ac_horaentrada")),
+                                DataValida(rs.getTimestamp("ac_horasaida")),
+                                rs.getDouble("ac_valor")
+                        )
+                );
             }
         } catch (SQLException sqlex) {
             System.out.println("Erro: " + sqlex.getMessage());

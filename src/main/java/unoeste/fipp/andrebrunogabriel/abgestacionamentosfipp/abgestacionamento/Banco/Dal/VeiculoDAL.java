@@ -266,6 +266,69 @@ public class VeiculoDAL implements IDAL<Veiculo>{
         return listaVeiculo;
     }
 
+
+    public List<Veiculo> SelectNaoEstacionados() {
+        List<Veiculo> listaVeiculo= new ArrayList<Veiculo>();
+
+        try{
+            String sql = "SELECT V.VEI_COD, "+
+                    "	V.VEI_PLACA, "+
+                    "	V.VEI_COR, "+
+                    "	V.MOD_COD, "+
+                    "	MO.MOD_DESC, "+
+                    "   MA.MAR_COD, "+
+                    "	MA.MAR_DESC, "+
+                    "	V.PROP_COD, "+
+                    "	PR.PROP_CPF, "+
+                    "	PR.PROP_NOME, "+
+                    "	PR.PROP_RUA, "+
+                    "	PR.PROP_NUMERO, "+
+                    "	PR.PROP_CEP, "+
+                    "	PR.PROP_BAIRRO, "+
+                    "	PR.PROP_CIDADE, "+
+                    "	PR.PROP_UF, "+
+                    "	PR.PROP_EMAIL, "+
+                    "	PR.PROP_FONE "+
+                    "FROM VEICULO V "+
+                    "INNER JOIN MODELO MO ON MO.MOD_COD = V.MOD_COD "+
+                    "INNER JOIN MARCA MA ON MA.MAR_COD = MO.MAR_COD "+
+                    "INNER JOIN PROPRIETARIO PR ON PR.PROP_COD = V.PROP_COD "+
+                    "WHERE (SELECT COUNT(1) FROM ACESSO AC " +
+                    "       WHERE AC.VEI_COD = V.VEI_COD " +
+                    "       AND AC.AC_HORASAIDA IS NULL) = 0 "+
+                    "ORDER BY V.VEI_PLACA";
+            Banco.Conectar();
+            PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
+            ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
+            while(rs.next()) {
+                listaVeiculo.add(new Veiculo(rs.getInt("vei_cod"),
+                        rs.getString("vei_placa"),
+                        rs.getString("vei_cor"),
+                        new Modelo(rs.getInt("mod_cod"),
+                                rs.getString("mod_desc"),
+                                new Marca(rs.getInt("mar_cod"),
+                                        rs.getString("mar_desc"))
+                        ),
+                        new Proprietario(rs.getInt("prop_cod"),
+                                rs.getString("prop_cpf"),
+                                rs.getString("prop_nome"),
+                                rs.getString("prop_email"),
+                                rs.getInt("prop_cep"),
+                                rs.getString("prop_uf"),
+                                rs.getString("prop_cidade"),
+                                rs.getString("prop_bairro"),
+                                rs.getString("prop_rua"),
+                                rs.getString("prop_numero"),
+                                rs.getString("prop_fone")
+                        )
+                ));
+            }
+        }catch(SQLException sqlex){
+            System.out.println("Erro: "+ sqlex.getMessage());
+        }
+        return listaVeiculo;
+    }
+
     public boolean deletar(int id)
     {
         try{

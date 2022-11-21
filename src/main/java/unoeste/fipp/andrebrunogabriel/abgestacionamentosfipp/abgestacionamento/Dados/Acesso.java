@@ -1,6 +1,7 @@
 package unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Acesso {
     private int Id;
@@ -14,11 +15,11 @@ public class Acesso {
     }
 
     public Acesso(int id, Veiculo veiculo, LocalDateTime horaDeEntrada, LocalDateTime horaDeSaida, double valor) {
-        Id = id;
-        Veiculo = veiculo;
-        HoraDeEntrada = horaDeEntrada;
-        HoraDeSaida = horaDeSaida;
-        Valor = valor;
+        setId(id);
+        setVeiculo(veiculo);
+        setHoraDeEntrada(horaDeEntrada);
+        setHoraDeSaida(horaDeSaida);
+        setValor(valor);
     }
 
     public Acesso(Veiculo veiculo, LocalDateTime horaDeEntrada, LocalDateTime horaDeSaida, double valor) {
@@ -41,16 +42,21 @@ public class Acesso {
         Veiculo = veiculo;
     }
 
-    public LocalDateTime getHoraDeEntrada() {
-        return HoraDeEntrada;
+    public String getHoraDeEntrada() {
+        if (HoraDeEntrada != null)
+            return HoraDeEntrada.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        else
+            return null;
     }
 
     public void setHoraDeEntrada(LocalDateTime horaDeEntrada) {
         HoraDeEntrada = horaDeEntrada;
     }
 
-    public LocalDateTime getHoraDeSaida() {
-        return HoraDeSaida;
+    public String getHoraDeSaida() {
+        if (HoraDeSaida != null)
+            return HoraDeSaida.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        return null;
     }
 
     public void setHoraDeSaida(LocalDateTime horaDeSaida) {

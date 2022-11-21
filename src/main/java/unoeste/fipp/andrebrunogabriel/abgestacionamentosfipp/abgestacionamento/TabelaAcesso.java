@@ -16,7 +16,9 @@ import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.D
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Modelo;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Proprietario;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Veiculo;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Formatacoes.MaskFieldUtil;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
@@ -26,54 +28,57 @@ public class TabelaAcesso implements Initializable {
     public TableView <Acesso>Tabela;
     public TableColumn <Acesso, Integer>colCodigo;
     public TableColumn <Acesso, Veiculo>colPlaca;
-    public TableColumn <Acesso, Veiculo>colCor;
-    public TableColumn <Acesso, Veiculo>colModelo;
-    public TableColumn <Acesso, Veiculo>colProprietario;
     public TableColumn <Acesso, LocalDateTime>colEntrada;
     public TableColumn <Acesso, LocalDateTime>colSaida;
     public TableColumn <Acesso, Double>colValor;
+    public Button btExibicao;
 
-
-
+    private int VisualizaTodos;
     public static Acesso aux = new Acesso();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colCodigo.setCellValueFactory(new PropertyValueFactory<Acesso, Integer>("Id"));
-        colEntrada.setCellValueFactory(new PropertyValueFactory<Acesso, LocalDateTime>("Placa"));
-        colSaida.setCellValueFactory(new PropertyValueFactory<Acesso, LocalDateTime>("Placa"));
-        colValor.setCellValueFactory(new PropertyValueFactory<Acesso, Double>("Placa"));
+        colPlaca.setCellValueFactory(new PropertyValueFactory<Acesso, Veiculo>("Veiculo"));
+        colEntrada.setCellValueFactory(new PropertyValueFactory<Acesso, LocalDateTime>("HoraDeEntrada"));
+        colSaida.setCellValueFactory(new PropertyValueFactory<Acesso, LocalDateTime>("HoraDeSaida"));
+        colValor.setCellValueFactory(new PropertyValueFactory<Acesso, Double>("Valor"));
 
-        /*colPlaca.setCellValueFactory(new PropertyValueFactory<Veiculo, String>("Placa"));
-        colCor.setCellValueFactory(new PropertyValueFactory<Veiculo, String>("Cor"));
-        colModelo.setCellValueFactory(new PropertyValueFactory<Veiculo, Modelo>("Modelo"));
-        colProprietario.setCellValueFactory(new PropertyValueFactory<Veiculo, Proprietario>("Proprietario"));
-*/
+        MaskFieldUtil.placaVeiculofield(tfFiltro);
+
+        VisualizaTodos = 0;
+        btExibicao.setText("Exibir Todos");
         CarregarTabela();
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
-        //Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select(tfFiltro.getText())));
+        if (VisualizaTodos == 1)
+            Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where lower(vei_placa) LIKE ('"+tfFiltro.getText().toLowerCase()+"%')")));
+        else
+            Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where ac_horasaida is null and lower(vei_placa) LIKE ('"+tfFiltro.getText().toLowerCase()+"%')")));
     }
 
-    public void onActionNovaEntrada(ActionEvent actionEvent) {
-        /*aux = new Acesso();
-        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadVeiculo.fxml"));
+    public void onActionNovaEntrada(ActionEvent actionEvent) throws IOException {
+        aux = new Acesso();
+        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadAcesso.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         Stage stage = new Stage();
-        stage.setTitle("Novo Veículo");
+        stage.setTitle("Nova Entrada");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
 
         stage.setResizable(false);
         stage.showAndWait();
 
-        CarregarTabela();*/
+        CarregarTabela();
     }
 
     private void CarregarTabela(){
-        //Tabela.setItems(FXCollections.observableArrayList(new VeiculoDAL().Select()));
+        if (VisualizaTodos == 1)
+            Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("")));
+        else
+            Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where ac_horasaida is null")));
     }
 
 
@@ -120,5 +125,18 @@ public class TabelaAcesso implements Initializable {
                 alert.showAndWait();
             }
         }*/
+    }
+
+    public void onActionExibir(ActionEvent actionEvent) {
+        if (VisualizaTodos == 1) {
+            VisualizaTodos = 0;
+            btExibicao.setText("Exibir Todos");
+        }
+        else {
+            VisualizaTodos = 1;
+            btExibicao.setText("Exibir Apenas Estacionados");
+        }
+
+        CarregarTabela();
     }
 }
