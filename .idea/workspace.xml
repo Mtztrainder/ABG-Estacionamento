@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93c2d754-194c-4792-a8ec-c1d585e0319a" name="Changes" comment="Acesso" />
+    <list default="true" id="93c2d754-194c-4792-a8ec-c1d585e0319a" name="Changes" comment="Adicionado validação da placa e máscara">
+      <change afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadAcesso.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadAcesso.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2022_6_48_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2022_6_48_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Banco/Dal/AcessoDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Banco/Dal/AcessoDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Banco/Dal/VeiculoDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Banco/Dal/VeiculoDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Dados/Acesso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Dados/Acesso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaAcesso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaAcesso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaVeiculo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaVeiculo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Menu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaAcesso.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaAcesso.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,8 +26,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -39,21 +52,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/22gab/OneDrive/Área de Trabalho/FACULDADE/4 TERMO/FERRO 2/2 BIM/Trabalho/ABG-Estacionamento/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/Banco/Dal&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_directory_selection": "G:/Outros computadores/Meu computador/FACULDADE/4 TERMO/FERRO 2/2 BIM/Trabalho/ABG-Estacionamento/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento",
+    "last_opened_file_path": "G:/Outros computadores/Meu computador/FACULDADE/4 TERMO/FERRO 2/2 BIM/Trabalho/ABG-Estacionamento/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\Outros computadores\Meu computador\FACULDADE\4 TERMO\FERRO 2\2 BIM\Trabalho\ABG-Estacionamento\src\main\resources\unoeste\fipp\andrebrunogabriel\abgestacionamentosfipp\abgestacionamento" />
       <recent name="C:\Users\22gab\OneDrive\Área de Trabalho\FACULDADE\4 TERMO\FERRO 2\2 BIM\Trabalho\ABG-Estacionamento\src\main\java\unoeste\fipp\andrebrunogabriel\abgestacionamentosfipp\abgestacionamento\Banco\Dal" />
       <recent name="C:\Users\22gab\OneDrive\Área de Trabalho\FACULDADE\4 TERMO\FERRO 2\2 BIM\Trabalho\ABG-Estacionamento\src\main\java\unoeste\fipp\andrebrunogabriel\abgestacionamentosfipp\abgestacionamento\Formatacoes" />
       <recent name="C:\Users\22gab\OneDrive\Área de Trabalho\FACULDADE\4 TERMO\FERRO 2\2 BIM\Trabalho\ABG-Estacionamento\src\main\resources\unoeste\fipp\andrebrunogabriel\abgestacionamentosfipp\abgestacionamento" />
-      <recent name="G:\Outros computadores\Meu computador\FACULDADE\4 TERMO\FERRO 2\2 BIM\Trabalho\ABG-Estacionamento\src\main\resources\unoeste\fipp\andrebrunogabriel\abgestacionamentosfipp\abgestacionamento" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\Outros computadores\Meu computador\FACULDADE\4 TERMO\FERRO 2\2 BIM\Trabalho\ABG-Estacionamento\src\main\java\unoeste\fipp\andrebrunogabriel\abgestacionamentosfipp\abgestacionamento" />

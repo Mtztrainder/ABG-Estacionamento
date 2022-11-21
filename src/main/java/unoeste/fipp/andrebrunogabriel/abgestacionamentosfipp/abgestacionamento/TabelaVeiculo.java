@@ -17,6 +17,7 @@ import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.D
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Proprietario;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Singleton;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Veiculo;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Formatacoes.MaskFieldUtil;
 
 import java.net.URL;
 import java.util.ResourceBundle;

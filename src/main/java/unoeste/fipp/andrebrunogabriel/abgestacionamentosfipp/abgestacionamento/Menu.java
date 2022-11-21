@@ -66,15 +66,12 @@ public class Menu extends Application {
         ExibePOPUP("CadValores.fxml", "Alterar Valores");
     }
 
-    public void onActionEntrada(ActionEvent actionEvent) throws Exception {
-        ExibePOPUP("CadValores.fxml", "Registrar Entrada");
-    }
-
-    public void onActionSaida(ActionEvent actionEvent) throws Exception {
-        ExibePOPUP("CadValores.fxml", "Registrar Saída");
+    public void onActionRegistrar(ActionEvent actionEvent) throws Exception {
+        AlteraPainel("TabelaAcesso.fxml");
     }
 
     public void onActionSair(ActionEvent actionEvent) {
         System.exit(0);
     }
+
 }
