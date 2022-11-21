@@ -52,10 +52,7 @@ public class TabelaAcesso implements Initializable {
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
-        if (VisualizaTodos == 1)
-            Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where lower(vei_placa) LIKE ('"+tfFiltro.getText().toLowerCase()+"%')")));
-        else
-            Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where ac_horasaida is null and lower(vei_placa) LIKE ('"+tfFiltro.getText().toLowerCase()+"%')")));
+        CarregarTabela();
     }
 
     public void onActionNovaEntrada(ActionEvent actionEvent) throws IOException {
@@ -64,7 +61,7 @@ public class TabelaAcesso implements Initializable {
         Scene scene = new Scene(fxmlLoader.load());
 
         Stage stage = new Stage();
-        stage.setTitle("Nova Entrada");
+        stage.setTitle("Registrar Entrada");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -75,56 +72,52 @@ public class TabelaAcesso implements Initializable {
     }
 
     private void CarregarTabela(){
-        if (VisualizaTodos == 1)
-            Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("")));
-        else
-            Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where ac_horasaida is null")));
+
+        if (!tfFiltro.getText().isEmpty()){
+            if (VisualizaTodos == 1)
+                Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where lower(vei_placa) LIKE ('"+tfFiltro.getText().toLowerCase()+"%')")));
+            else
+                Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where ac_horasaida is null and lower(vei_placa) LIKE ('"+tfFiltro.getText().toLowerCase()+"%')")));
+        }
+        else {
+            if (VisualizaTodos == 1)
+                Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("")));
+            else
+                Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where ac_horasaida is null")));
+        }
     }
 
 
 
     public void onActionAlterar(ActionEvent actionEvent) throws Exception {
-/*
+
         if (Tabela.getSelectionModel().getSelectedIndex() > -1)
             aux = Tabela.getSelectionModel().getSelectedItem();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadVeiculo.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadAcesso.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         Stage stage = new Stage();
-        stage.setTitle("Alterar Veículo");
+        stage.setTitle("Registrar Saída");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
 
         stage.setResizable(false);
         stage.showAndWait();
 
-        CarregarTabela();*/
+        CarregarTabela();
     }
 
     public void onActionApagar(ActionEvent actionEvent) {
-        /*if (Tabela.getSelectionModel().getSelectedIndex() > -1)
+        if (Tabela.getSelectionModel().getSelectedIndex() > -1)
             aux = Tabela.getSelectionModel().getSelectedItem();
 
-
-
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText("Deseja apagar o veículo " + aux.getPlaca());
-
+        alert.setContentText("Deseja realmente apagar o registro?");
         if (alert.showAndWait().get() == ButtonType.OK){
-
-            if (!new VeiculoDAL().dependentes(aux.getId()))
-            {
-                new VeiculoDAL().deletar(aux.getId());
-                CarregarTabela();
-            }
-            else{
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Erro");
-                alert.setContentText("Não foi possível remover! O veículo "+aux.getPlaca()+" possui dependentes.");
-                alert.showAndWait();
-            }
-        }*/
+            new AcessoDAL().deletar(aux.getId());
+            CarregarTabela();
+        }
     }
 
     public void onActionExibir(ActionEvent actionEvent) {

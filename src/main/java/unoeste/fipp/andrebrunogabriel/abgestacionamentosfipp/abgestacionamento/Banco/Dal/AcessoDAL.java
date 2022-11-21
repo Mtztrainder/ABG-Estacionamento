@@ -39,18 +39,17 @@ public class AcessoDAL{
         return false;
     }
 
-    public boolean RegistrarSaida(Veiculo veiculo, LocalDateTime dh, double valor) {
+    public boolean RegistrarSaida(int Codigo, LocalDateTime dh, double valor) {
         String sql ="update acesso " +
                     "set ac_horasaida = ?, " +
                         "ac_valor = ? " +
-                    "where vei_cod = ? " +
-                    "and ac_horasaida is null";
+                    "where ac_cod = ? ";
         try{
             Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setString(1, dh.toString());
             pstmt.setDouble(2, valor);
-            pstmt.setInt(3, veiculo.getId());
+            pstmt.setInt(3, Codigo);
 
             if (!Banco.getConexao().manipular(pstmt.toString())) {
                 System.out.println(Banco.getConexao().getMensagemErro());
@@ -194,5 +193,23 @@ public class AcessoDAL{
             System.out.println("Erro: " + sqlex.getMessage());
         }
         return listaAcesso;
+    }
+
+    public boolean deletar(int id) {
+        try{
+            String sql = "delete from Acesso where ac_cod=?";
+            Banco.Conectar();
+            PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
+            pstmt.setInt(1, id);
+            if (!Banco.getConexao().manipular(pstmt.toString())) {
+                System.out.println(Banco.getConexao().getMensagemErro());
+                return false;
+            }
+
+            return true;
+        }catch(SQLException sqlex){
+            System.out.println("Erro: "+ sqlex.getMessage());
+        }
+        return  false;
     }
 }

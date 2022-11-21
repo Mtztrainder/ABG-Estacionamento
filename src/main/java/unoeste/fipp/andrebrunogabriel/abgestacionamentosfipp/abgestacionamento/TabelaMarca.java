@@ -51,7 +51,7 @@ public class TabelaMarca implements Initializable {
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
-        Tabela.setItems(FXCollections.observableArrayList(new MarcaDAL().Select(tfFiltro.getText())));
+        CarregarTabela();
     }
 
     public void onActionNovaMarca(ActionEvent actionEvent) throws Exception{
@@ -77,11 +77,13 @@ public class TabelaMarca implements Initializable {
     }
 
     private void CarregarTabela(){
-
-        Tabela.setItems(FXCollections.observableArrayList(new MarcaDAL().Select()));
+        if (!tfFiltro.getText().isEmpty()){
+            Tabela.setItems(FXCollections.observableArrayList(new MarcaDAL().Select(tfFiltro.getText())));
+        }
+        else {
+            Tabela.setItems(FXCollections.observableArrayList(new MarcaDAL().Select()));
+        }
     }
-
-
 
     public void onActionAlterar(ActionEvent actionEvent) throws Exception {
 

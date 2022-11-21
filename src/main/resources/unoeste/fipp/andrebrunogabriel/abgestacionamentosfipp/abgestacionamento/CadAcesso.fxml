@@ -17,11 +17,20 @@
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="32.0" layoutY="91.0" prefHeight="17.0" prefWidth="149.0" text="Placa">
+      <Label layoutX="32.0" layoutY="91.0" prefHeight="17.0" prefWidth="149.0" text="Placa" >
          <font>
             <Font size="14.0" />
          </font></Label>
-      <ComboBox fx:id="cbPlaca" layoutX="32.0" layoutY="111.0" prefHeight="26.0" prefWidth="183.0" style="-fx-font-size: 14;" />
+      <ComboBox fx:id="cbPlaca" layoutX="32.0" layoutY="111.0" prefHeight="26.0" prefWidth="183.0" style="-fx-font-size: 14;" promptText="Digite a placa" />
+
+      <Label fx:id="lbValor" layoutX="300.0" layoutY="91.0" prefHeight="17.0" prefWidth="67.0" text="Valor">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <TextField fx:id="tfValor" alignment="CENTER_RIGHT" layoutX="300.0" layoutY="110.0" prefHeight="25.0" prefWidth="67.0">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
 
       <Button fx:id="btCancelar" layoutX="298.0" layoutY="168.0" mnemonicParsing="false" onAction="#onActionCancelar" prefHeight="43.0" prefWidth="149.0" style="-fx-background-color: #ff5252;" text="Cancelar" textFill="WHITE">
          <font>

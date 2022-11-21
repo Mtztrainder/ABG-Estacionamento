@@ -44,11 +44,8 @@ public class TabelaProprietario implements Initializable {
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
+        CarregarTabela();
         Tabela.setItems(FXCollections.observableArrayList(new ProprietarioDAL().Select(tfFiltro.getText())));
-    }
-
-    public void AbrirCadastro(String Titulo){
-
     }
 
     public void onActionNovoProprietario(ActionEvent actionEvent) throws Exception{
@@ -68,9 +65,13 @@ public class TabelaProprietario implements Initializable {
     }
 
     private void CarregarTabela(){
-        Tabela.setItems(FXCollections.observableArrayList(new ProprietarioDAL().Select()));
+        if (!tfFiltro.getText().isEmpty()){
+            Tabela.setItems(FXCollections.observableArrayList(new ProprietarioDAL().Select(tfFiltro.getText())));
+        }
+        else {
+            Tabela.setItems(FXCollections.observableArrayList(new ProprietarioDAL().Select()));
+        }
     }
-
 
 
     public void onActionAlterar(ActionEvent actionEvent) throws Exception {

@@ -37,11 +37,7 @@ public class TabelaModelo implements Initializable {
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
-        Tabela.setItems(FXCollections.observableArrayList(new ModeloDAL().Select(tfFiltro.getText())));
-    }
-
-    public void AbrirCadastro(String Titulo){
-
+        CarregarTabela();
     }
 
     public void onActionNovoModelo(ActionEvent actionEvent) throws Exception{
@@ -61,9 +57,13 @@ public class TabelaModelo implements Initializable {
     }
 
     private void CarregarTabela(){
-        Tabela.setItems(FXCollections.observableArrayList(new ModeloDAL().Select()));
+        if (!tfFiltro.getText().isEmpty()){
+            Tabela.setItems(FXCollections.observableArrayList(new ModeloDAL().Select(tfFiltro.getText())));
+        }
+        else {
+            Tabela.setItems(FXCollections.observableArrayList(new ModeloDAL().Select()));
+        }
     }
-
 
 
     public void onActionAlterar(ActionEvent actionEvent) throws Exception {
