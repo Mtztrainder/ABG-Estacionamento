@@ -31,6 +31,10 @@ TextField, ComboBox{
     -fx-cursor: hand;
 }
 
+.table-column{
+      -fx-alignment: CENTER;
+}
+
 Button{
     -fx-text-fill: #ffffff;
     -fx-font-size: 15;

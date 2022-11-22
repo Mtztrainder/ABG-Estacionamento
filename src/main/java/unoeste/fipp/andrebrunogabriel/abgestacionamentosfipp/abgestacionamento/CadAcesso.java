@@ -26,7 +26,7 @@ public class CadAcesso implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         tfCodigo.setText(String.valueOf(TabelaAcesso.aux.getId()));
         cbPlaca.setItems(FXCollections.observableArrayList(new VeiculoDAL().SelectNaoEstacionados()));
-        tfValor.setText(String.valueOf(TabelaAcesso.aux.getValor()));
+        tfValor.setText(String.valueOf(TabelaAcesso.aux.getValor()).replace(".", ","));
 
         MaskFieldUtil.monetaryField(tfValor);
 
@@ -39,7 +39,12 @@ public class CadAcesso implements Initializable {
         }
 
         Platform.runLater(() ->{
-            cbPlaca.requestFocus();
+            if (tfCodigo.getText().equals("0")) {
+                cbPlaca.requestFocus();
+            }
+            else{
+                tfValor.requestFocus();
+            }
             cbPlaca.setValue(TabelaAcesso.aux.getVeiculo());
         });
     }
