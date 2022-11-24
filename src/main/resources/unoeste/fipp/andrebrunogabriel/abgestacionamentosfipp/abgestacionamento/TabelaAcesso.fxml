@@ -15,7 +15,7 @@
    <children>
       <HBox fx:id="hbAcesso" alignment="CENTER" prefHeight="79.0" prefWidth="640.0" spacing="20.0" style="-fx-background-color: #e9f0f7;">
          <children>
-            <DatePicker fx:id="dpData" onAction="#onChangeData" prefHeight="25.0" prefWidth="105.0" promptText="Digite a data de busca" />
+            <DatePicker fx:id="dpData" onAction="#onChangeData" prefHeight="25.0" prefWidth="207.0" promptText="Digite a data de busca" />
              <Button fx:id="btExibicao" mnemonicParsing="false" onAction="#onActionExibir" style="" text="Exibir Todos">
                  <font>
                      <Font size="14.0" />
