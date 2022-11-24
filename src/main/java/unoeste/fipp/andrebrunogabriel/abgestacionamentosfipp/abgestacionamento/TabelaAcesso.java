@@ -88,14 +88,14 @@ public class TabelaAcesso implements Initializable {
 
         if (!tfFiltro.getText().isEmpty()){
             if (VisualizaTodos == 1)
-                Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where date_trunc('day', COALESCE(AC_HORASAIDA, CURRENT_TIMESTAMP)) = '"+data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))+"' " +
+                Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where to_char(COALESCE(AC_HORASAIDA, CURRENT_TIMESTAMP), 'DD/MM/YYYY') = '"+data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))+"' " +
                                                                                                "and lower(vei_placa) LIKE ('"+tfFiltro.getText().toLowerCase()+"%') ")));
             else
                 Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where ac_horasaida is null and lower(vei_placa) LIKE ('"+tfFiltro.getText().toLowerCase()+"%')")));
         }
         else {
             if (VisualizaTodos == 1)
-                Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where date_trunc('day', COALESCE(AC_HORASAIDA, CURRENT_TIMESTAMP)) = '"+data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))+"' ")));
+                Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where to_char(COALESCE(AC_HORASAIDA, CURRENT_TIMESTAMP), 'DD/MM/YYYY')  = '"+data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))+"' ")));
             else
                 Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where ac_horasaida is null")));
         }
