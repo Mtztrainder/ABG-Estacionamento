@@ -20,7 +20,9 @@ import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.F
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class TabelaAcesso implements Initializable {
@@ -32,6 +34,7 @@ public class TabelaAcesso implements Initializable {
     public TableColumn <Acesso, LocalDateTime>colSaida;
     public TableColumn <Acesso, Double>colValor;
     public Button btExibicao;
+    public DatePicker dpData;
 
     private int VisualizaTodos;
     public static Acesso aux = new Acesso();
@@ -48,10 +51,17 @@ public class TabelaAcesso implements Initializable {
 
         VisualizaTodos = 0;
         btExibicao.setText("Exibir Todos");
+        dpData.setValue(LocalDate.now());
+        dpData.setVisible(false);
+
         CarregarTabela();
     }
 
     public void onKeyTyped(KeyEvent keyEvent) {
+        CarregarTabela();
+    }
+
+    public void onChangeData(){
         CarregarTabela();
     }
 
@@ -72,16 +82,20 @@ public class TabelaAcesso implements Initializable {
     }
 
     private void CarregarTabela(){
+        LocalDate data = dpData.getValue();
+        if (data == null)
+            data = LocalDate.now();
 
         if (!tfFiltro.getText().isEmpty()){
             if (VisualizaTodos == 1)
-                Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where lower(vei_placa) LIKE ('"+tfFiltro.getText().toLowerCase()+"%')")));
+                Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where date_trunc('day', COALESCE(AC_HORASAIDA, CURRENT_TIMESTAMP)) = '"+data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))+"' " +
+                                                                                               "and lower(vei_placa) LIKE ('"+tfFiltro.getText().toLowerCase()+"%') ")));
             else
                 Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where ac_horasaida is null and lower(vei_placa) LIKE ('"+tfFiltro.getText().toLowerCase()+"%')")));
         }
         else {
             if (VisualizaTodos == 1)
-                Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("")));
+                Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where date_trunc('day', COALESCE(AC_HORASAIDA, CURRENT_TIMESTAMP)) = '"+data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))+"' ")));
             else
                 Tabela.setItems(FXCollections.observableArrayList(new AcessoDAL().Select("where ac_horasaida is null")));
         }
@@ -124,10 +138,13 @@ public class TabelaAcesso implements Initializable {
         if (VisualizaTodos == 1) {
             VisualizaTodos = 0;
             btExibicao.setText("Exibir Todos");
+            dpData.setVisible(false);
         }
         else {
             VisualizaTodos = 1;
             btExibicao.setText("Exibir Apenas Estacionados");
+            dpData.setValue(LocalDate.now());
+            dpData.setVisible(true);
         }
 
         CarregarTabela();

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -14,6 +15,7 @@
    <children>
       <HBox fx:id="hbAcesso" alignment="CENTER" prefHeight="79.0" prefWidth="640.0" spacing="20.0" style="-fx-background-color: #e9f0f7;">
          <children>
+            <DatePicker fx:id="dpData" onAction="#onChangeData" prefHeight="25.0" prefWidth="105.0" promptText="Digite a data de busca" />
              <Button fx:id="btExibicao" mnemonicParsing="false" onAction="#onActionExibir" style="" text="Exibir Todos">
                  <font>
                      <Font size="14.0" />
@@ -33,7 +35,7 @@
           <TableColumn fx:id="colCodigo" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="ID" />
             <TableColumn fx:id="colPlaca" minWidth="100.0" prefWidth="100.0" text="Veículo" />
             <TableColumn fx:id="colEntrada" minWidth="0.0" prefWidth="150.0" text="Horário de Entrada" />
-            <TableColumn fx:id="colSaida"  minWidth="0.0" prefWidth="150.0" text="Horário de Saída" />
+            <TableColumn fx:id="colSaida" minWidth="0.0" prefWidth="150.0" text="Horário de Saída" />
             <TableColumn fx:id="colValor" minWidth="0.0" prefWidth="100.0" text="Valor" />
         </columns>
          <columnResizePolicy>

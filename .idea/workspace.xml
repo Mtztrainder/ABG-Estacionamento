@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93c2d754-194c-4792-a8ec-c1d585e0319a" name="Changes" comment="Acesso">
+    <list default="true" id="93c2d754-194c-4792-a8ec-c1d585e0319a" name="Changes" comment="Correções">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_13_2022_5_55_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_13_2022_5_55_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_20_2022_11_37_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_20_2022_11_37_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_21_2022_12_48_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_21_2022_12_48_AM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadMarca.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadMarca.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadModelo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadModelo.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/estilo.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/estilo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaAcesso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaAcesso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaAcesso.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaAcesso.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +63,7 @@
       <recent name="G:\Outros computadores\Meu computador\FACULDADE\4 TERMO\FERRO 2\2 BIM\Trabalho\ABG-Estacionamento\src\main\resources\unoeste\fipp\andrebrunogabriel\abgestacionamentosfipp\abgestacionamento" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\22gab\OneDrive\Área de Trabalho\FACULDADE\4 TERMO\FERRO 2\2 BIM\Trabalho\ABG-Estacionamento\src\main\java\unoeste\fipp\andrebrunogabriel\abgestacionamentosfipp\abgestacionamento\Formatacoes" />
       <recent name="G:\Outros computadores\Meu computador\FACULDADE\4 TERMO\FERRO 2\2 BIM\Trabalho\ABG-Estacionamento\src\main\java\unoeste\fipp\andrebrunogabriel\abgestacionamentosfipp\abgestacionamento" />
       <recent name="G:\Outros computadores\Meu computador\FACULDADE\4 TERMO\FERRO 2\2 BIM\Trabalho\ABG-Estacionamento\src\main\resources\unoeste\fipp\andrebrunogabriel\abgestacionamentosfipp\abgestacionamento" />
     </key>
@@ -170,42 +174,7 @@
       <option name="project" value="LOCAL" />
       <updated>1668642193481</updated>
     </task>
-    <task id="LOCAL-00011" summary="Aopa">
-      <created>1668742567657</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1668742567657</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Valores">
-      <created>1668744340647</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1668744340647</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Acesso">
-      <created>1668970944260</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1668970944260</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Acesso">
-      <created>1668971120568</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1668971120568</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Acesso">
-      <created>1668996989539</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1668996989539</updated>
-    </task>
-    <option name="localTasksCounter" value="16" />
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -226,18 +195,7 @@
     <MESSAGE value="Att MVC com Camada DAL" />
     <MESSAGE value="Att DAL Proprietario" />
     <MESSAGE value="Correções" />
-    <MESSAGE value="Aopa" />
-    <MESSAGE value="Valores" />
-    <MESSAGE value="Acesso" />
-    <option name="LAST_COMMIT_MESSAGE" value="Acesso" />
-  </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="scene.getX()" language="JAVA" />
-        <watch expression="event.getScreenX()" language="JAVA" />
-      </configuration>
-    </watches-manager>
+    <option name="LAST_COMMIT_MESSAGE" value="Correções" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ABG_Estacionamento$Menu.ic" NAME="Menu Coverage Results" MODIFIED="1668272033016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
