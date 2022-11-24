@@ -1,9 +1,10 @@
 @font-face {
-    font-family: 'Barlow Condensed', sans-serif;
-    src: url('../../../../../fonts/BarlowCondensed-Regular.ttf');
+    font-family: 'Ubuntu Mono', monospace;
+    src: url('../../../../../fonts/UbuntuMono-Regular.ttf');
 }
 * {
-    -fx-font-family: "Barlow Condensed";
+    -fx-font-family: "Ubuntu Mono";
+    -fx-font-size: 17;
 }
 
 TextField, ComboBox{
@@ -28,6 +29,10 @@ TextField, ComboBox{
 #lblClose:hover{
     -fx-text-fill: #3b546b;
     -fx-cursor: hand;
+}
+
+.table-column{
+      -fx-alignment: CENTER;
 }
 
 Button{

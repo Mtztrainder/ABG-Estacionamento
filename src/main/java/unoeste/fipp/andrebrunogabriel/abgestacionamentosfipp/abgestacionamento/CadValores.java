@@ -28,9 +28,9 @@ public class CadValores implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         conf = new ConfDAL().Select();
-        tfValorHora.setText(String.valueOf(conf.getValorHora()));
+        tfValorHora.setText(String.valueOf(conf.getValorHora()).replace(".", ","));
         tfCarencia.setText(String.valueOf(conf.getCarencia()));
-        tfValorHoraAdicional.setText(String.valueOf(conf.getValorAdic()));
+        tfValorHoraAdicional.setText(String.valueOf(conf.getValorAdic()).replace(".", ","));
 
         Platform.runLater(
                 () -> {

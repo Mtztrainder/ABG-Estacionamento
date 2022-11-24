@@ -34,11 +34,6 @@
                   <MenuItem onAction="#onActionRegistrar" mnemonicParsing="false" text="Entrada/Saída..." />
               </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
         </menus>
       </MenuBar>
    </top>
