@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import org.json.JSONObject;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ModeloDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ProprietarioDAL;
@@ -180,5 +181,9 @@ public class CadProprietario implements Initializable {
         if (keyEvent.getCode().equals(KeyCode.ESCAPE)){
             ((Node) keyEvent.getSource()).getScene().getWindow().hide();
         }
+    }
+
+    public void onActionX(MouseEvent mouseEvent) {
+        ((Node) mouseEvent.getSource()).getScene().getWindow().hide();
     }
 }

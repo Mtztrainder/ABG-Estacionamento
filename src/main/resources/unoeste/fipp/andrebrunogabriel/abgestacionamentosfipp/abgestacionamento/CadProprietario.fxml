@@ -3,108 +3,136 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="419.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.CadProprietario">
+<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="419.0" prefWidth="913.0" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.CadProprietario">
    <children>
-      <Label layoutX="53.0" layoutY="33.0" prefHeight="17.0" prefWidth="67.0" text="Código">
+      <Label layoutX="233.0" layoutY="37.0" prefHeight="17.0" prefWidth="67.0" text="Código">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="tfCodigo" editable="false" layoutX="53.0" layoutY="50.0" prefHeight="25.0" prefWidth="67.0">
+      <TextField fx:id="tfCodigo" editable="false" layoutX="233.0" layoutY="54.0" prefHeight="25.0" prefWidth="67.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="53.0" layoutY="86.0" prefHeight="17.0" prefWidth="222.0" text="Nome">
+      <Label layoutX="233.0" layoutY="90.0" prefHeight="17.0" prefWidth="222.0" text="Nome">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="tfNome" layoutX="53.0" layoutY="103.0" prefHeight="30.0" prefWidth="460.0" promptText="Digite o Nome">
+      <TextField fx:id="tfNome" layoutX="233.0" layoutY="107.0" prefHeight="30.0" prefWidth="460.0" promptText="Digite o Nome">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="530.0" layoutY="85.0" prefHeight="17.0" prefWidth="149.0" text="CPF">
+      <Label layoutX="722.0" layoutY="89.0" prefHeight="17.0" prefWidth="149.0" text="CPF">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="tfCPF" layoutX="529.0" layoutY="103.0" prefHeight="30.0" prefWidth="149.0" promptText="Digite o CPF">
+      <TextField fx:id="tfCPF" layoutX="721.0" layoutY="107.0" prefHeight="30.0" prefWidth="149.0" promptText="Digite o CPF">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="54.0" layoutY="141.0" prefHeight="17.0" prefWidth="222.0" text="E-mail">
+      <Label layoutX="234.0" layoutY="145.0" prefHeight="17.0" prefWidth="222.0" text="E-mail">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="tfEmail" layoutX="53.0" layoutY="159.0" prefHeight="30.0" prefWidth="460.0" promptText="Digite o E-mail">
+      <TextField fx:id="tfEmail" layoutX="233.0" layoutY="163.0" prefHeight="30.0" prefWidth="460.0" promptText="Digite o E-mail">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="529.0" layoutY="142.0" prefHeight="17.0" prefWidth="149.0" text="Telefone">
+      <Label layoutX="721.0" layoutY="146.0" prefHeight="17.0" prefWidth="149.0" text="Telefone">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="tfTelefone" layoutX="529.0" layoutY="158.0" prefHeight="30.0" prefWidth="149.0" promptText="Digite o Telefone">
+      <TextField fx:id="tfTelefone" layoutX="721.0" layoutY="162.0" prefHeight="30.0" prefWidth="149.0" promptText="Digite o Telefone">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="53.0" layoutY="197.0" prefHeight="17.0" prefWidth="81.0" text="CEP">
+      <Label layoutX="233.0" layoutY="201.0" prefHeight="17.0" prefWidth="81.0" text="CEP">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="tfCEP" layoutX="52.0" layoutY="215.0" prefHeight="30.0" prefWidth="149.0" promptText="Digite o CEP">
+      <TextField fx:id="tfCEP" layoutX="232.0" layoutY="219.0" prefHeight="30.0" prefWidth="149.0" promptText="Digite o CEP">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="215.0" layoutY="197.0" prefHeight="17.0" prefWidth="272.0" text="Logradouro">
+      <Label layoutX="395.0" layoutY="201.0" prefHeight="17.0" prefWidth="272.0" text="Logradouro">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="tfLogradouro" layoutX="214.0" layoutY="215.0" prefHeight="30.0" prefWidth="298.0" promptText="Digite o Logradouro">
+      <TextField fx:id="tfLogradouro" layoutX="394.0" layoutY="219.0" prefHeight="30.0" prefWidth="298.0" promptText="Digite o Logradouro">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="530.0" layoutY="197.0" prefHeight="17.0" prefWidth="149.0" text="Número">
+      <Label layoutX="722.0" layoutY="201.0" prefHeight="17.0" prefWidth="149.0" text="Número">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="tfNumero" layoutX="529.0" layoutY="215.0" prefHeight="30.0" prefWidth="149.0" promptText="Digite o Número">
+      <TextField fx:id="tfNumero" layoutX="721.0" layoutY="219.0" prefHeight="30.0" prefWidth="149.0" promptText="Digite o Número">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="56.0" layoutY="251.0" prefHeight="17.0" prefWidth="149.0" text="Bairro">
+      <Label layoutX="236.0" layoutY="255.0" prefHeight="17.0" prefWidth="149.0" text="Bairro">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="tfBairro" layoutX="54.0" layoutY="268.0" prefHeight="25.0" prefWidth="222.0" promptText="Digite o Bairro">
+      <TextField fx:id="tfBairro" layoutX="234.0" layoutY="272.0" prefHeight="25.0" prefWidth="222.0" promptText="Digite o Bairro">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="291.0" layoutY="251.0" prefHeight="17.0" prefWidth="222.0" text="Cidade">
+      <Label layoutX="471.0" layoutY="255.0" prefHeight="17.0" prefWidth="222.0" text="Cidade">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="tfCidade" layoutX="289.0" layoutY="268.0" prefHeight="25.0" prefWidth="222.0" promptText="Digite a Cidade">
+      <TextField fx:id="tfCidade" layoutX="469.0" layoutY="272.0" prefHeight="25.0" prefWidth="222.0" promptText="Digite a Cidade">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="529.0" layoutY="250.0" prefHeight="17.0" prefWidth="46.0" text="Estado">
+      <Label layoutX="721.0" layoutY="254.0" prefHeight="17.0" prefWidth="46.0" text="Estado">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField fx:id="tfEstado" layoutX="527.0" layoutY="267.0" prefHeight="25.0" prefWidth="149.0" promptText="Digite o Estado">
+      <TextField fx:id="tfEstado" layoutX="719.0" layoutY="271.0" prefHeight="25.0" prefWidth="149.0" promptText="Digite o Estado">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Button fx:id="btCancelar" layoutX="421.0" layoutY="336.0" mnemonicParsing="false" onAction="#onActionCancelar" prefHeight="43.0" prefWidth="149.0" style="-fx-background-color: #ff5252;" text="Cancelar" textFill="WHITE">
+      <Button fx:id="btCancelar" layoutX="601.0" layoutY="340.0" mnemonicParsing="false" onAction="#onActionCancelar" prefHeight="43.0" prefWidth="149.0" style="-fx-background-color: #ff5252;" text="Cancelar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btConfirmar" layoutX="153.0" layoutY="336.0" mnemonicParsing="false" onAction="#onActionConfirmar" prefHeight="43.0" prefWidth="149.0" style="-fx-background-color: #1565c0;" text="Confirmar" textFill="WHITE">
+      <Button fx:id="btConfirmar" layoutX="333.0" layoutY="340.0" mnemonicParsing="false" onAction="#onActionConfirmar" prefHeight="43.0" prefWidth="149.0" style="-fx-background-color: #1565c0;" text="Confirmar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
+      <Pane layoutY="-2.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="426.0" prefWidth="193.0" style="-fx-background-color: #4b99c7;">
+         <children>
+            <Label alignment="CENTER" layoutX="31.0" layoutY="41.0" prefHeight="30.0" prefWidth="111.0" text="Proprietário" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="78.0" layoutY="187.0" prefHeight="30.0" prefWidth="52.0" text="ABG" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="212.0" prefHeight="60.0" prefWidth="164.0" text="Estacionamentos" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ImageView id="imgLogo" fitHeight="109.0" fitWidth="164.0" layoutX="17.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../images/carro2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label fx:id="lblClose" layoutX="880.0" layoutY="29.0" onMouseClicked="#onActionX" prefHeight="17.0" prefWidth="12.0" text="X" />
    </children>
 </AnchorPane>

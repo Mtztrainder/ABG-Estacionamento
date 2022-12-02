@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.MarcaDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ModeloDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Marca;
@@ -28,6 +29,15 @@ public class TabelaModelo implements Initializable {
 
     public static Modelo aux = new Modelo();
 
+    public void moveScreen(Scene scene, Stage stage)
+    {
+        scene.setOnMousePressed(pressEvent -> {
+            scene.setOnMouseDragged(dragEvent -> {
+                stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+                stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+            });
+        });
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colCodigo.setCellValueFactory(new PropertyValueFactory<Modelo, Integer>("Id"));
@@ -45,10 +55,14 @@ public class TabelaModelo implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadModelo.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
+
         Stage stage = new Stage();
+        moveScreen(scene,stage);
+
         stage.setTitle("Novo Modelo");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
 
         stage.setResizable(false);
         stage.showAndWait();
