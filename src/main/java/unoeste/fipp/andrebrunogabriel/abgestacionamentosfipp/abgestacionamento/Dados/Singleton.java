@@ -1,5 +1,7 @@
 package unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados;
 
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Util.Banco;
+
 import java.util.ArrayList;
 
 public class Singleton {

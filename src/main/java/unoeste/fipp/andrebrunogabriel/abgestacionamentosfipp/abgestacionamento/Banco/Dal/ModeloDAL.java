@@ -16,7 +16,6 @@ public class ModeloDAL implements IDAL<Modelo> {
     {
         try{
             String sql = "insert into Modelo(mar_cod, mod_desc) values(?, ?)";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, modelo.getMarca().getId());
             pstmt.setString(2, modelo.getDescricao());
@@ -36,7 +35,6 @@ public class ModeloDAL implements IDAL<Modelo> {
     {
         try{
             String sql = "update Modelo set mar_cod=?, mod_desc=? where mod_cod=?";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, modelo.getMarca().getId());
             pstmt.setString(2, modelo.getDescricao());
@@ -57,7 +55,6 @@ public class ModeloDAL implements IDAL<Modelo> {
     {
         try{
             String sql = "delete from Modelo where mod_cod=?";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
 
@@ -77,8 +74,6 @@ public class ModeloDAL implements IDAL<Modelo> {
     public boolean dependentes(int id) {
         try {
             String sql = "select count(1) from Veiculo where mod_cod=?";
-            Banco.Conectar();
-
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
@@ -117,7 +112,6 @@ public class ModeloDAL implements IDAL<Modelo> {
     public List<Modelo> Select() {
         List<Modelo> listaModelos= new ArrayList<Modelo>();
         String sql = "select * from modelo md inner join marca mc on mc.mar_cod = md.mar_cod order by mod_desc";
-        Banco.Conectar();
         ResultSet rs = Banco.getConexao().consultar(sql);
         try {
             while(rs.next())
@@ -138,7 +132,6 @@ public class ModeloDAL implements IDAL<Modelo> {
 
         try {
             String sql = "select * from modelo md inner join marca mc on mc.mar_cod = md.mar_cod where lower(mod_desc) LIKE ? order by mod_desc";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setString(1, filtro.toLowerCase() + "%");
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());

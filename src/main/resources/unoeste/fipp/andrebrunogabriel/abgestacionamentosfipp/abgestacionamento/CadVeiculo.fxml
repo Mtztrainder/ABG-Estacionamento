@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="324.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.CadVeiculo">
+<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="324.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.CadVeiculo">
    <children>
       <Label layoutX="32.0" layoutY="38.0" prefHeight="17.0" prefWidth="67.0" text="Código" />
       <TextField fx:id="tfCodigo" alignment="CENTER_RIGHT" editable="false" layoutX="32.0" layoutY="55.0" prefHeight="25.0" prefWidth="67.0">

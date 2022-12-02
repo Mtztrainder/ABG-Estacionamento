@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="367.0" prefWidth="483.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.CadValores">
+<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="367.0" prefWidth="483.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.CadValores">
    <children>
       <Label layoutX="32.0" layoutY="91.0" prefHeight="17.0" prefWidth="149.0" text="Valor Hora">
          <font>

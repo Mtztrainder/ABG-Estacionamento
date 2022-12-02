@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.MarcaDAL;
@@ -90,5 +92,11 @@ public class CadMarca implements Initializable {
 
     public void onActionX(MouseEvent mouseEvent) {
         ((Node) mouseEvent.getSource()).getScene().getWindow().hide();
+    }
+
+    public void onKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ESCAPE)){
+            ((Node) keyEvent.getSource()).getScene().getWindow().hide();
+        }
     }
 }

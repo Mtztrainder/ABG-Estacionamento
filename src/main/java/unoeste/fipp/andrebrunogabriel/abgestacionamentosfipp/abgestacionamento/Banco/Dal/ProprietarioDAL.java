@@ -16,7 +16,6 @@ public class ProprietarioDAL implements IDAL<Proprietario>{
     {
         try{
             String sql = "insert into proprietario(prop_cpf, prop_nome, prop_rua,prop_numero, prop_cep, prop_bairro, prop_cidade, prop_uf, prop_email, prop_fone) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setString(1, proprietario.getCPF());
             pstmt.setString(2, proprietario.getNome());
@@ -46,7 +45,6 @@ public class ProprietarioDAL implements IDAL<Proprietario>{
 
         try{
             String sql = "update proprietario set prop_cpf=?, prop_nome=?,prop_rua=?,prop_numero=?, prop_cep=?,prop_bairro=?, prop_cidade=?, prop_uf=?, prop_email=?, prop_fone=? where prop_cod=?";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setString(1, proprietario.getCPF());
             pstmt.setString(2, proprietario.getNome());
@@ -75,7 +73,6 @@ public class ProprietarioDAL implements IDAL<Proprietario>{
     {
         try{
             String sql = "delete from proprietario where prop_cod=?";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
 
@@ -95,8 +92,6 @@ public class ProprietarioDAL implements IDAL<Proprietario>{
     public boolean dependentes(int id) {
         try {
             String sql = "select count(1) from Veiculo where prop_cod=?";
-            Banco.Conectar();
-
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
@@ -115,7 +110,6 @@ public class ProprietarioDAL implements IDAL<Proprietario>{
 
         try{
             String sql = "select * from proprietario where prop_cod = ?";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
@@ -141,7 +135,6 @@ public class ProprietarioDAL implements IDAL<Proprietario>{
     public List<Proprietario> Select() {
         List<Proprietario> listaProprietarios= new ArrayList<Proprietario>();
         String sql = "select * from proprietario";
-        Banco.Conectar();
         ResultSet rs = Banco.getConexao().consultar(sql);
         try {
             while(rs.next())
@@ -169,7 +162,6 @@ public class ProprietarioDAL implements IDAL<Proprietario>{
 
         try{
             String sql = "select * from proprietario where prop_nome LIKE ? order by prop_nome";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setString(1, filtro+"%");
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());

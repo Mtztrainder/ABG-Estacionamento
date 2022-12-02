@@ -12,7 +12,6 @@ public class ConfDAL{
     public ConfDAL(){
         try{
             String sql = "select count(1) from conf";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
             rs.next();
@@ -20,7 +19,6 @@ public class ConfDAL{
                 Conf conf = new Conf();
 
                 sql = "insert into conf (conf_valorhora, conf_valoradic, conf_carencia) values (?, ?, ?)";
-                Banco.Conectar();
                 pstmt = Banco.getConn().prepareStatement(sql);
                 pstmt.setDouble(1, conf.getValorHora());
                 pstmt.setDouble(2, conf.getValorAdic());
@@ -38,7 +36,6 @@ public class ConfDAL{
     public Conf Select(){
         try{
             String sql = "select conf_valorhora, conf_valoradic, conf_carencia from conf";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
             rs.next();
@@ -54,7 +51,6 @@ public class ConfDAL{
     public boolean altera(Conf conf){
         try{
             String sql = "update conf set conf_valorhora=?, conf_valoradic=?, conf_carencia=?";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setDouble(1, conf.getValorHora());
             pstmt.setDouble(2, conf.getValorAdic());

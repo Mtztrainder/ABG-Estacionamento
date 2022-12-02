@@ -17,7 +17,6 @@ public class MarcaDAL implements IDAL<Marca>{
     {
         try{
             String sql = "insert into Marca(mar_desc) values(?)";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setString(1, marca.getDescricao());
 
@@ -39,7 +38,6 @@ public class MarcaDAL implements IDAL<Marca>{
 
         try{
             String sql = "update Marca set mar_desc=? where mar_cod=?";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setString(1, marca.getDescricao());
             pstmt.setInt(2, marca.getId());
@@ -59,8 +57,6 @@ public class MarcaDAL implements IDAL<Marca>{
     public boolean dependentes(int id){
         try {
             String sql = "select count(1) from Modelo where mar_cod=?";
-            Banco.Conectar();
-
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
@@ -79,7 +75,6 @@ public class MarcaDAL implements IDAL<Marca>{
 
         try{
             String sql = "select * from marca where mar_cod = ?";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
@@ -97,7 +92,6 @@ public class MarcaDAL implements IDAL<Marca>{
     public List<Marca> Select() {
         List<Marca> listaMarcas= new ArrayList<Marca>();
         String sql = "select * from marca order by mar_desc";
-        Banco.Conectar();
         ResultSet rs = Banco.getConexao().consultar(sql);
         try {
             while(rs.next())
@@ -116,7 +110,6 @@ public class MarcaDAL implements IDAL<Marca>{
 
         try{
             String sql = "select * from marca where lower(mar_desc) LIKE ? order by mar_desc";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setString(1, filtro.toLowerCase()+"%");
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
@@ -136,7 +129,6 @@ public class MarcaDAL implements IDAL<Marca>{
     {
         try{
             String sql = "delete from Marca where mar_cod=?";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
             if (!Banco.getConexao().manipular(pstmt.toString())) {

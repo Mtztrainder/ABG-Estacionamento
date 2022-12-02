@@ -2,6 +2,7 @@ module unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.base;
+    requires com.jfoenix;
     requires org.json;
     requires java.sql;
     requires org.postgresql.jdbc;

@@ -22,7 +22,6 @@ public class AcessoDAL{
     public boolean RegistrarEntrada(Veiculo veiculo, LocalDateTime dh) {
         String sql ="insert into acesso(vei_cod, ac_horaentrada) values (?, ?)";
         try{
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, veiculo.getId());
             pstmt.setString(2, dh.toString());
@@ -45,7 +44,6 @@ public class AcessoDAL{
                         "ac_valor = ? " +
                     "where ac_cod = ? ";
         try{
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setString(1, dh.toString());
             pstmt.setDouble(2, valor);
@@ -73,7 +71,6 @@ public class AcessoDAL{
                     "inner join veiculo vec on ac.vei_cod = vec.vei_cod " +
                     "where ac_cod = ? " +
                     "order by ac_cod desc ";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
@@ -103,7 +100,6 @@ public class AcessoDAL{
                 "INNER JOIN MARCA MA ON MA.MAR_COD = MO.MAR_COD "+
                 "INNER JOIN PROPRIETARIO PR ON PR.PROP_COD = VEC.PROP_COD " +
                 "order by ac_cod desc ";
-        Banco.Conectar();
         ResultSet rs = Banco.getConexao().consultar(sql);
         try {
             while(rs.next())
@@ -156,7 +152,6 @@ public class AcessoDAL{
                     "INNER JOIN PROPRIETARIO PR ON PR.PROP_COD = VEC.PROP_COD " +
                     " "+filtro+" " +
                     "order by ac_cod desc ";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
 
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
@@ -198,7 +193,6 @@ public class AcessoDAL{
     public boolean deletar(int id) {
         try{
             String sql = "delete from Acesso where ac_cod=?";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
             if (!Banco.getConexao().manipular(pstmt.toString())) {

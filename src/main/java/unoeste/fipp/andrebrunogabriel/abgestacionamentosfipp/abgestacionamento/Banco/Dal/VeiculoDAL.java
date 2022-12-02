@@ -20,7 +20,6 @@ public class VeiculoDAL implements IDAL<Veiculo>{
     {
         try{
             String sql = "insert into Veiculo(vei_placa, mod_cod, vei_cor, prop_cod) values(?, ?, ?, ?)";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
 
             pstmt.setString(1, veiculo.getPlaca());
@@ -45,7 +44,6 @@ public class VeiculoDAL implements IDAL<Veiculo>{
 
         try{
             String sql = "update Veiculo set vei_placa=?, mod_cod=?, vei_cor=?, prop_cod=? where vei_cod=?";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
 
             pstmt.setString(1, veiculo.getPlaca());
@@ -69,7 +67,6 @@ public class VeiculoDAL implements IDAL<Veiculo>{
     public boolean dependentes(int id){
         /*try {
             String sql = "select count(1) from Modelo where mar_cod=?";
-            Banco.Conectar();
 
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
@@ -112,7 +109,6 @@ public class VeiculoDAL implements IDAL<Veiculo>{
                     "INNER JOIN PROPRIETARIO PR ON PR.PROP_COD = V.PROP_COD "+
                     "WHERE vei_cod = ? "+
                     "ORDER BY V.VEI_PLACA";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
@@ -172,7 +168,6 @@ public class VeiculoDAL implements IDAL<Veiculo>{
                 "INNER JOIN MARCA MA ON MA.MAR_COD = MO.MAR_COD "+
                 "INNER JOIN PROPRIETARIO PR ON PR.PROP_COD = V.PROP_COD "+
                 "ORDER BY V.VEI_PLACA";
-        Banco.Conectar();
         ResultSet rs = Banco.getConexao().consultar(sql);
         try {
             while(rs.next())
@@ -233,7 +228,6 @@ public class VeiculoDAL implements IDAL<Veiculo>{
                     "INNER JOIN PROPRIETARIO PR ON PR.PROP_COD = V.PROP_COD "+
                     "WHERE lower(vei_placa) LIKE ? "+
                     "ORDER BY V.VEI_PLACA";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setString(1, filtro.toLowerCase()+"%");
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
@@ -297,7 +291,6 @@ public class VeiculoDAL implements IDAL<Veiculo>{
                     "       WHERE AC.VEI_COD = V.VEI_COD " +
                     "       AND AC.AC_HORASAIDA IS NULL) = 0 "+
                     "ORDER BY V.VEI_PLACA";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             ResultSet rs = Banco.getConexao().consultar(pstmt.toString());
             while(rs.next()) {
@@ -333,7 +326,6 @@ public class VeiculoDAL implements IDAL<Veiculo>{
     {
         try{
             String sql = "delete from Veiculo where vei_cod=?";
-            Banco.Conectar();
             PreparedStatement pstmt = Banco.getConn().prepareStatement(sql);
             pstmt.setInt(1, id);
             if (!Banco.getConexao().manipular(pstmt.toString())) {

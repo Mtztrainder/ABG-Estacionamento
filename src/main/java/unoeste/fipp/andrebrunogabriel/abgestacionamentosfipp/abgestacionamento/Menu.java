@@ -9,6 +9,7 @@ import javafx.scene.control.Control;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Util.Banco;
 
 import java.io.IOException;
 
@@ -23,6 +24,8 @@ public class Menu extends Application {
         stage.setTitle("ABG - Estacionamentos");
         stage.setScene(scene);
         stage.setMaximized(true);
+
+        Banco.Conectar();
 
         stage.show();
     }
