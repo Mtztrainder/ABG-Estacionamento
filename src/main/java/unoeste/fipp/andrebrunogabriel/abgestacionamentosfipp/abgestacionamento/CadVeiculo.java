@@ -5,12 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ModeloDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ProprietarioDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.VeiculoDAL;
@@ -29,6 +27,7 @@ public class CadVeiculo implements Initializable {
     public ComboBox <String>cbCor;
 
     public Button btConfirmar, btCancelar;
+    public Label lblClose, lblTitulo;
 
     //método executado quando a janela é criada.
     @Override
@@ -53,6 +52,9 @@ public class CadVeiculo implements Initializable {
                     tfPlaca.requestFocus();
                 }
         );
+
+        if(TabelaVeiculo.aux.getId() != 0)
+            lblTitulo.setText(lblTitulo.getText().replace("Cadastrar", "Alterar"));
     }
 
     private void AlertaObrigatoriedade(){
@@ -140,5 +142,8 @@ public class CadVeiculo implements Initializable {
         if (keyEvent.getCode().equals(KeyCode.ESCAPE)){
             ((Node) keyEvent.getSource()).getScene().getWindow().hide();
         }
+    }
+    public void onActionX(MouseEvent mouseEvent) {
+        ((Node) mouseEvent.getSource()).getScene().getWindow().hide();
     }
 }

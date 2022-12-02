@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ModeloDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.ProprietarioDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.VeiculoDAL;
@@ -48,15 +49,29 @@ public class TabelaVeiculo implements Initializable {
         CarregarTabela();
     }
 
+    public void moveScreen(Scene scene, Stage stage)
+    {
+        scene.setOnMousePressed(pressEvent -> {
+            scene.setOnMouseDragged(dragEvent -> {
+                stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+                stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+            });
+        });
+    }
+
     public void onActionNovoVeiculo(ActionEvent actionEvent) throws Exception{
         aux = new Veiculo();
         FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadVeiculo.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-
+        scene.getStylesheets().add(getClass().getResource("estilo.css").toExternalForm());
         Stage stage = new Stage();
+
+        moveScreen(scene,stage);
+
         stage.setTitle("Novo Veículo");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
 
         stage.setResizable(false);
         stage.showAndWait();
@@ -81,11 +96,16 @@ public class TabelaVeiculo implements Initializable {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadVeiculo.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(getClass().getResource("estilo.css").toExternalForm());
 
         Stage stage = new Stage();
+
+        moveScreen(scene,stage);
+
         stage.setTitle("Alterar Veículo");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
 
         stage.setResizable(false);
         stage.showAndWait();
