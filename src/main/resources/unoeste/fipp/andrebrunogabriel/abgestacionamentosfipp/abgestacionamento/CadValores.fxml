@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#onKeyPressed" prefHeight="367.0" prefWidth="704.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.CadValores">
+<AnchorPane onKeyPressed="#onKeyPressed"  stylesheets="@estilo.css" prefHeight="367.0" prefWidth="704.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.CadValores">
    <children>
       <Label layoutX="241.0" layoutY="84.0" prefHeight="17.0" prefWidth="149.0" text="Valor Hora">
          <font>

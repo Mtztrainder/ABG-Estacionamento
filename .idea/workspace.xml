@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93c2d754-194c-4792-a8ec-c1d585e0319a" name="Changes" comment="Veículo">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadAcesso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadAcesso.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadVeiculo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadVeiculo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaAcesso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/TabelaAcesso.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadAcesso.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/unoeste/fipp/andrebrunogabriel/abgestacionamentosfipp/abgestacionamento/CadAcesso.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="93c2d754-194c-4792-a8ec-c1d585e0319a" name="Changes" comment="Filtro de data2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
