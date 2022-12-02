@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.AcessoDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.VeiculoDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Dados.Acesso;
@@ -62,6 +63,16 @@ public class TabelaAcesso implements Initializable {
         CarregarTabela();
     }
 
+    public void moveScreen(Scene scene, Stage stage)
+    {
+        scene.setOnMousePressed(pressEvent -> {
+            scene.setOnMouseDragged(dragEvent -> {
+                stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+                stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+            });
+        });
+    }
+
     public void onChangeData(){
         CarregarTabela();
     }
@@ -70,11 +81,16 @@ public class TabelaAcesso implements Initializable {
         aux = new Acesso();
         FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadAcesso.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(getClass().getResource("estilo.css").toExternalForm());
 
         Stage stage = new Stage();
+
+        moveScreen(scene,stage);
+
         stage.setTitle("Registrar Entrada");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
 
         stage.setResizable(false);
         stage.showAndWait();
@@ -111,11 +127,16 @@ public class TabelaAcesso implements Initializable {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("CadAcesso.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(getClass().getResource("estilo.css").toExternalForm());
 
         Stage stage = new Stage();
+
+        moveScreen(scene,stage);
+
         stage.setTitle("Registrar Saída");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
 
         stage.setResizable(false);
         stage.showAndWait();

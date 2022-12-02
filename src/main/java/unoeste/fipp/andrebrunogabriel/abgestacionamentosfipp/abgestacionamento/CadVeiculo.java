@@ -43,11 +43,12 @@ public class CadVeiculo implements Initializable {
 
         Platform.runLater(
                 () -> {
-                    cbModelo.setValue(TabelaVeiculo.aux.getModelo());
-                    cbProprietario.setValue(TabelaVeiculo.aux.getProprietario());
-
-                    if (!TabelaVeiculo.aux.getCor().isEmpty())
-                        cbCor.setValue(TabelaVeiculo.aux.getCor());
+                    if (!tfCodigo.getText().equals("0")) {
+                        cbModelo.setValue(TabelaVeiculo.aux.getModelo());
+                        cbProprietario.setValue(TabelaVeiculo.aux.getProprietario());
+                        if (!TabelaVeiculo.aux.getCor().isEmpty())
+                            cbCor.setValue(TabelaVeiculo.aux.getCor());
+                    }
 
                     tfPlaca.requestFocus();
                 }
