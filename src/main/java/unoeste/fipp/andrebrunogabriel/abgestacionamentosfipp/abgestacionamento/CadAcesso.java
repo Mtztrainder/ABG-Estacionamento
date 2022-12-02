@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.AcessoDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Dal.VeiculoDAL;
 import unoeste.fipp.andrebrunogabriel.abgestacionamentosfipp.abgestacionamento.Banco.Util.Banco;
@@ -23,6 +24,7 @@ public class CadAcesso implements Initializable {
     public TextField tfCodigo, tfValor;
     public ComboBox <Veiculo> cbPlaca;
     public Button btConfirmar, btCancelar;
+    public Label lblTitulo, lblClose;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -46,9 +48,13 @@ public class CadAcesso implements Initializable {
             }
             else{
                 tfValor.requestFocus();
+                cbPlaca.setValue(TabelaAcesso.aux.getVeiculo());
             }
-            cbPlaca.setValue(TabelaAcesso.aux.getVeiculo());
         });
+
+
+        if(TabelaAcesso.aux.getId() != 0)
+            lblTitulo.setText(lblTitulo.getText().replace("Entrada", "Saída"));
     }
 
 
@@ -94,5 +100,9 @@ public class CadAcesso implements Initializable {
         if (keyEvent.getCode().equals(KeyCode.ESCAPE)){
             ((Node) keyEvent.getSource()).getScene().getWindow().hide();
         }
+    }
+
+    public void onActionX(MouseEvent mouseEvent) {
+        ((Node) mouseEvent.getSource()).getScene().getWindow().hide();
     }
 }
